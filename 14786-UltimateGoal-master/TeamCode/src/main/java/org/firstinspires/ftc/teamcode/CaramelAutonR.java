@@ -26,19 +26,19 @@ public class CaramelAutonR extends LinearOpMode {
     public static double ENDING_Y = -35;
 
     public static double SHOOTING_X = -3;
-    public static double SHOOTING_Y = -50;
+    public static double SHOOTING_Y = -48;
 
     // Set upon which target zone to go to based on rings scanned
     private double WOBBLE_X;
     private double WOBBLE_Y;
 
-    public static double QUAD_RING_X = 50;
+    public static double QUAD_RING_X = 55;
     public static double QUAD_RING_Y = -50;
 
-    public static double SINGLE_RING_X = 25;
-    public static double SINGLE_RING_Y = -15;
+    public static double SINGLE_RING_X = 30;
+    public static double SINGLE_RING_Y = -20;
 
-    public static double NO_RING_X = -3;
+    public static double NO_RING_X = 5;
     public static double NO_RING_Y = -50;
 
     public static double STRAFE_LEFT_TO_RING = 13;
@@ -146,9 +146,9 @@ public class CaramelAutonR extends LinearOpMode {
                         // between these instead of using markers
                         drive.followTrajectory(dropWobbleGoal);
 
-                        mech.wobbleArmControl(Mechanisms.wobbleArmPos.AVG);
+                        mech.wobbleArmControl(Mechanisms.wobbleArmPos.DOWN);
 
-                        mech.wait(1000);
+                        mech.wait(1500);
 
                         mech.wobbleControl(Mechanisms.wobblePos.OPEN);
 

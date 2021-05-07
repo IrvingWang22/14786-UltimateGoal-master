@@ -51,7 +51,6 @@ import static org.firstinspires.ftc.teamcode.drive.DriveConstants.kV;
  * control back to the tuning process.
  */
 @Config
-@Disabled
 @Autonomous(group = "drive")
 public class DriveVelocityPIDTuner extends LinearOpMode {
     public static double DISTANCE = 72; // in

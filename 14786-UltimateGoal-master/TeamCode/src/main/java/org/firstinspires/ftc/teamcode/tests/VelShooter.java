@@ -75,8 +75,8 @@ public class VelShooter extends LinearOpMode {
             shooterOne.setVelocity(currentTPS);
             shooterTwo.setVelocity(currentTPS);
 
-            telemetry.addData("S1 Current", shooterOne.getCurrentPosition());
-            telemetry.addData("S2 Current", shooterTwo.getCurrentPosition());
+            telemetry.addData("S1 Current", shooterOne.getVelocity());
+            telemetry.addData("S2 Current", shooterTwo.getVelocity());
             telemetry.addLine();
             telemetry.addData("S Expected", currentTPS);
             telemetry.update();

@@ -36,29 +36,25 @@ public class Mechanisms {
     // Init Lists
 
     // Other Variables
-    public static int PUSH_RESTORE_TIME = 150;
+    public static int PUSH_RESTORE_TIME = 70;
 
     // Servo Positions
-    public static double PUSH_MAX_VALUE = 0;
-    public static double PUSH_MIN_VALUE = 0.2;
+    public static double PUSH_MAX_VALUE = 0.23;
+    public static double PUSH_MIN_VALUE = 0.39;
 
-    public static double WOBBLE_MAX_VALUE = 0.99;
-    public static double WOBBLE_MIN_VALUE = 0.1;
+    public static double WOBBLE_MAX_VALUE = 0.45;
+    public static double WOBBLE_MIN_VALUE = 0.01;
 
-    public static double WOBBLE_CLAW_MIN_VALUE = 0.9;
-    public static double WOBBLE_CLAW_MAX_VALUE = 0.1;
+    public static double WOBBLE_CLAW_MIN_VALUE = 0.2;
+    public static double WOBBLE_CLAW_MAX_VALUE = 0.03;
 
-    public static double WOBBLE_TURRET_MAX_VALUE = 0.99;
+    public static double WOBBLE_TURRET_MAX_VALUE = 0.87;
     public static double WOBBLE_TURRET_MIN_VALUE = 0.1;
 
-    public static double STICK_MAX_VALUE = 0.99;
+    public static double STICK_MAX_VALUE = 0.2;
     public static double STICK_MIN_VALUE = 0.1;
 
-
-
-
-
-    public static double SHOOT_TPS = -3000;
+    public static double SHOOT_TPS = 1500;
 
 
 
@@ -89,8 +85,8 @@ public class Mechanisms {
     }
 
     // Power Values
-    public static double BOTTOM_ROLLER_POWER = 0.5;
-    public static double INTAKE_POWER = 0.7;
+    public static double BOTTOM_ROLLER_POWER = 0.7;
+    public static double INTAKE_POWER = 0.9;
 
     private static double OFF_POWER = 0;
 
@@ -131,12 +127,13 @@ public class Mechanisms {
         // Init initial Positions
        indexPush.setPosition(PUSH_MIN_VALUE);
 
-        //wobbleControl(wobblePos.CLOSE);
-        //wobbleArmControl(wobbleArmPos.UP);
-        //wobbleTurretControl(wobbleTurretPos.IN);
+        wobbleControl(wobblePos.OPEN);
+        wobbleArmControl(wobbleArmPos.UP);
+        wobbleTurretControl(wobbleTurretPos.IN);
 
 
         //Set initial Position of Bars
+        //
         //stickOneControl(stickOnePos.OUT);
 
     }
@@ -167,6 +164,13 @@ public class Mechanisms {
             indexPush.setPosition(PUSH_MIN_VALUE);
             wait(PUSH_RESTORE_TIME);
         }
+    }
+
+    public void pushOneRings() {
+        indexPush.setPosition(PUSH_MAX_VALUE);
+        wait(PUSH_RESTORE_TIME);
+        indexPush.setPosition(PUSH_MIN_VALUE);
+        wait(PUSH_RESTORE_TIME);
     }
 
     public void wobbleControl(wobblePos pos) {

@@ -10,6 +10,8 @@ org/firstinspires/ftc/teamcode/tests/IntakeTest.java
  org.firstinspires.ftc.teamcode.tests.IntakeTest
 org/firstinspires/ftc/teamcode/tests/TestingOdometry1.java
  org.firstinspires.ftc.teamcode.tests.TestingOdometry1
+org/firstinspires/ftc/teamcode/CaramelAutonB2.java
+ org.firstinspires.ftc.teamcode.CaramelAutonB2
 org/firstinspires/ftc/teamcode/drive/opmode/AutomaticFeedforwardTuner.java
  org.firstinspires.ftc.teamcode.drive.opmode.AutomaticFeedforwardTuner
 org/firstinspires/ftc/teamcode/drive/opmode/BackAndForth.java
@@ -27,6 +29,7 @@ org/firstinspires/ftc/teamcode/drive/opmode/TurnTest.java
  org.firstinspires.ftc.teamcode.drive.opmode.TurnTest
 org/firstinspires/ftc/teamcode/drive/opmode/MaxAngularVelocityTuner.java
  org.firstinspires.ftc.teamcode.drive.opmode.MaxAngularVelocityTuner
+ org.firstinspires.ftc.teamcode.drive.opmode.MaxAngularVelocityTuner$MaxVelocityTuner
 org/firstinspires/ftc/teamcode/util/RegressionUtil.java
  org.firstinspires.ftc.teamcode.util.RegressionUtil
  org.firstinspires.ftc.teamcode.util.RegressionUtil$AccelResult
@@ -81,6 +84,8 @@ org/firstinspires/ftc/teamcode/drive/opmode/LocalizationTest.java
  org.firstinspires.ftc.teamcode.drive.opmode.LocalizationTest
 org/firstinspires/ftc/teamcode/tests/TestTrajectory.java
  org.firstinspires.ftc.teamcode.tests.TestTrajectory
+org/firstinspires/ftc/teamcode/wobbleTeleOp.java
+ org.firstinspires.ftc.teamcode.wobbleTeleOp
 org/firstinspires/ftc/teamcode/drive/SampleTankDrive.java
  org.firstinspires.ftc.teamcode.drive.SampleTankDrive
  org.firstinspires.ftc.teamcode.drive.SampleTankDrive$1
@@ -91,8 +96,6 @@ org/firstinspires/ftc/teamcode/tests/FastShooter.java
  org.firstinspires.ftc.teamcode.tests.FastShooter
 org/firstinspires/ftc/teamcode/drive/DriveConstants.java
  org.firstinspires.ftc.teamcode.drive.DriveConstants
-org/firstinspires/ftc/teamcode/drive/opmode/MaxVelocityTuner.java
- org.firstinspires.ftc.teamcode.drive.opmode.MaxVelocityTuner
 org/firstinspires/ftc/teamcode/tests/VelShooter.java
  org.firstinspires.ftc.teamcode.tests.VelShooter
 org/firstinspires/ftc/teamcode/CaramelAutonRN.java

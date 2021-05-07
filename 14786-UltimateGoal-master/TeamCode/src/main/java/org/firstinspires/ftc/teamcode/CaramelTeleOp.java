@@ -96,26 +96,38 @@ public class CaramelTeleOp extends LinearOpMode {
 
             }
 
-            if (gamepad1.dpad_up) mech.wobbleArmControl(Mechanisms.wobbleArmPos.UP);
+            //if (gamepad1.dpad_up) mech.wobbleArmControl(Mechanisms.wobbleArmPos.UP);
 
-            if (gamepad1.dpad_down) mech.wobbleArmControl(Mechanisms.wobbleArmPos.DOWN);
+            //if (gamepad1.dpad_down) mech.wobbleArmControl(Mechanisms.wobbleArmPos.DOWN);
 
-            if (gamepad1.dpad_left) mech.wobbleControl(Mechanisms.wobblePos.OPEN);
+            //if (gamepad1.dpad_left) mech.wobbleControl(Mechanisms.wobblePos.OPEN);
 
-            if (gamepad1.dpad_right) mech.wobbleControl(Mechanisms.wobblePos.CLOSE);
+            //if (gamepad1.dpad_right) mech.wobbleControl(Mechanisms.wobblePos.CLOSE);
 
-            //if (gamepad2.dpad_left) mech.wobbleControl(Mechanisms.wobblePos.OPEN);
+            if (gamepad2.dpad_up) mech.wobbleArmControl(Mechanisms.wobbleArmPos.UP);
 
-            //if (gamepad2.dpad_right) mech.wobbleControl(Mechanisms.wobblePos.CLOSE);
+            if (gamepad2.dpad_down) mech.wobbleArmControl(Mechanisms.wobbleArmPos.DOWN);
+
+            if (gamepad2.dpad_left) mech.wobbleControl(Mechanisms.wobblePos.OPEN);
+
+            if (gamepad2.dpad_right) mech.wobbleControl(Mechanisms.wobblePos.CLOSE);
+
+            if (gamepad2.b) mech.wobbleTurretControl(Mechanisms.wobbleTurretPos.IN);
+
+            if (gamepad2.a) mech.wobbleTurretControl(Mechanisms.wobbleTurretPos.OUT);
+
+            //if (gamepad2.dpad_left) mech.wobbleTurretControl(Mechanisms.wobbleTurretPos.IN);
+
+            //if (gamepad2.dpad_right) mech.wobbleTurretControl(Mechanisms.wobbleTurretPos.OUT);
 
             if (gamepad2.y) {
-                stickOne.setPosition(0.5);
+                stickOne.setPosition(1);
                 telemetry.addLine("eeeeeee");
                 telemetry.addLine();
             }
 
             if (gamepad2.x) {
-                stickOne.setPosition(1);
+                stickOne.setPosition(0.5);
                 telemetry.addLine("aaaaa");
                 telemetry.addLine();
             }
