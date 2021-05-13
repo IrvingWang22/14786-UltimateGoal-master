@@ -20,10 +20,10 @@ public class CaramelAutonB2 extends LinearOpMode {
 
     // Position Coordinates
     public static double STARTING_X = -63;
-    public static double STARTING_Y = 25;
+    public static double STARTING_Y = 25 ;
 
     public static double ENDING_X = 10;
-    public static double ENDING_Y = 35;
+    public static double ENDING_Y = 25;
 
     public static double SHOOTING_X = -3;
     public static double SHOOTING_Y = 48;
@@ -112,8 +112,11 @@ public class CaramelAutonB2 extends LinearOpMode {
                                 })
                                 .build();
 
-                        Trajectory goToShootOne = drive.trajectoryBuilder(dropWobbleGoal.end())
+                        Trajectory goToShootOne = drive.trajectoryBuilder(startPose)
                                 .splineToConstantHeading(new Vector2d(SHOOTING_X, SHOOTING_Y), Math.toRadians(0))
+                                .addDisplacementMarker(() -> {
+                                    mech.setShooter(Mechanisms.motorPower.HIGH);
+                                })
                                 .build();
 
                         Trajectory getNewRings = drive.trajectoryBuilder(goToShootOne.end())
@@ -136,7 +139,7 @@ public class CaramelAutonB2 extends LinearOpMode {
                                 .lineTo(new Vector2d(SHOOTING_X, SHOOTING_Y))
                                 .build();
 
-                        Trajectory parkOnLine = drive.trajectoryBuilder(goToShootTwo.end())
+                        Trajectory parkOnLine = drive.trajectoryBuilder(goToShootOne.end())
                                 .addDisplacementMarker(() -> {
                                     mech.setShooter(Mechanisms.motorPower.HIGH);
                                 })
@@ -145,43 +148,15 @@ public class CaramelAutonB2 extends LinearOpMode {
 
                         // Follow trajectories in order, may need to place functions
                         // between these instead of using markers
-                        drive.followTrajectory(dropWobbleGoal);
 
-                        /*if (detected.equals("NONE") || detected.equals("QUAD")) {
-                            drive.turn(WOBBLE_TURN);
-                        }*/
 
-                        mech.wobbleArmControl(Mechanisms.wobbleArmPos.DOWN);
-
-                        mech.wait(1500);
-
-                        mech.wobbleControl(Mechanisms.wobblePos.OPEN);
-
-                        /*
-                        if (detected.equals("NONE") || detected.equals("QUAD")) {
-                            drive.turn(-WOBBLE_TURN);
-                        }
-                          */
+                        mech.wait(1000);
                         drive.followTrajectory(goToShootOne);
-
+                        mech.wait(2000);
                         mech.pushRings();
 
-                        if (detected.equals("SINGLE") || detected.equals("QUAD")) {
-                            drive.followTrajectory(getNewRings);
-
-                            drive.followTrajectory(goBackIntake);
-
-                            mech.wait(1000);
-
-                            drive.followTrajectory(goToShootTwo);
-
-                            mech.wait(1000);
-
-                            mech.pushRings();
-
-                        }
-
                         drive.followTrajectory(parkOnLine);
+
 
                         autonRunning = false;
                     }

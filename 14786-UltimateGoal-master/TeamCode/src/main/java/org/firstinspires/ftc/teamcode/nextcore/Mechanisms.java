@@ -36,31 +36,32 @@ public class Mechanisms {
     // Init Lists
 
     // Other Variables
-    public static int PUSH_RESTORE_TIME = 70;
+    public static int PUSH_RESTORE_TIME = 90;
 
     // Servo Positions
     public static double PUSH_MAX_VALUE = 0.23;
     public static double PUSH_MIN_VALUE = 0.39;
 
-    public static double WOBBLE_MAX_VALUE = 0.45;
+    public static double WOBBLE_MAX_VALUE = 0.75;
     public static double WOBBLE_MIN_VALUE = 0.01;
 
-    public static double WOBBLE_CLAW_MIN_VALUE = 0.2;
+    public static double WOBBLE_CLAW_MIN_VALUE = 0.5;
     public static double WOBBLE_CLAW_MAX_VALUE = 0.03;
 
-    public static double WOBBLE_TURRET_MAX_VALUE = 0.87;
+    public static double WOBBLE_TURRET_MAX_VALUE = 0.87
+            ;
     public static double WOBBLE_TURRET_MIN_VALUE = 0.1;
 
     public static double STICK_MAX_VALUE = 0.2;
     public static double STICK_MIN_VALUE = 0.1;
 
     public static double SHOOT_TPS = 1500;
-
+    public static double POWERSHOT_TPS = 1300;
 
 
     // Power Enum
     public enum motorPower {
-        HIGH, STALL, OFF
+        HIGH, STALL, OFF, MED
     }
 
     public enum intakeState {
@@ -84,9 +85,13 @@ public class Mechanisms {
         IN, OUT
     }
 
+    public enum stickTwoPos {
+        IN, OUT
+    }
+
     // Power Values
-    public static double BOTTOM_ROLLER_POWER = 0.7;
-    public static double INTAKE_POWER = 0.9;
+    public static double BOTTOM_ROLLER_POWER = 0.9;
+    public static double INTAKE_POWER = 1;
 
     private static double OFF_POWER = 0;
 
@@ -107,6 +112,7 @@ public class Mechanisms {
         wobbleGrab = hardwareMap.get(Servo.class, "wobbleGrab");
         wobbleArm = hardwareMap.get(Servo.class, "wobbleArm");
         wobbleTurret = hardwareMap.get(Servo.class, "wobbleTurret");
+
         stickOne = hardwareMap.get(Servo.class, "stickOne");
         stickTwo = hardwareMap.get(Servo.class, "stickTwo");
 
@@ -125,7 +131,7 @@ public class Mechanisms {
         shooterOne.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         // Init initial Positions
-       indexPush.setPosition(PUSH_MIN_VALUE);
+        indexPush.setPosition(PUSH_MIN_VALUE);
 
         wobbleControl(wobblePos.OPEN);
         wobbleArmControl(wobbleArmPos.UP);
@@ -149,9 +155,15 @@ public class Mechanisms {
                 shooterOne.setVelocity(SHOOT_TPS / 2);
                 shooterTwo.setVelocity(SHOOT_TPS / 2);
                 break;
+            case MED:
+                shooterOne.setVelocity(POWERSHOT_TPS);
+                shooterTwo.setVelocity(POWERSHOT_TPS);
+                break;
+
             default:
                 shooterOne.setVelocity(OFF_POWER);
                 shooterTwo.setVelocity(OFF_POWER);
+
         }
     }
 
@@ -164,6 +176,13 @@ public class Mechanisms {
             indexPush.setPosition(PUSH_MIN_VALUE);
             wait(PUSH_RESTORE_TIME);
         }
+    }
+
+    public void pushRing() {
+        indexPush.setPosition(PUSH_MAX_VALUE);
+        wait(PUSH_RESTORE_TIME);
+        indexPush.setPosition(PUSH_MIN_VALUE);
+        wait(PUSH_RESTORE_TIME);
     }
 
     public void pushOneRings() {
@@ -223,7 +242,16 @@ public class Mechanisms {
         }
     }
 
-
+    public void stickTwoControl(stickTwoPos pos) {
+        switch (pos) {
+            case IN:
+                stickTwo.setPosition(STICK_MIN_VALUE);
+                break;
+            case OUT:
+                stickTwo.setPosition(STICK_MAX_VALUE);
+                break;
+        }
+    }
 
 
     public void runIntake(intakeState state) {

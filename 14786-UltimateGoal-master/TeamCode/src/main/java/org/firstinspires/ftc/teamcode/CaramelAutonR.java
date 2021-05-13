@@ -20,13 +20,13 @@ public class CaramelAutonR extends LinearOpMode {
 
     // Position Coordinates
     public static double STARTING_X = -63;
-    public static double STARTING_Y = -25;
+    public static double STARTING_Y = -50;
 
     public static double ENDING_X = 10;
-    public static double ENDING_Y = -35;
+    public static double ENDING_Y = -55;
 
     public static double SHOOTING_X = -3;
-    public static double SHOOTING_Y = -48;
+    public static double SHOOTING_Y = -40;
 
     // Set upon which target zone to go to based on rings scanned
     private double WOBBLE_X;
@@ -111,8 +111,11 @@ public class CaramelAutonR extends LinearOpMode {
                                 })
                                 .build();
 
-                        Trajectory goToShootOne = drive.trajectoryBuilder(dropWobbleGoal.end())
+                        Trajectory goToShootOne = drive.trajectoryBuilder(startPose)
                                 .splineToConstantHeading(new Vector2d(SHOOTING_X, SHOOTING_Y), Math.toRadians(0))
+                                .addDisplacementMarker(() -> {
+                                    mech.setShooter(Mechanisms.motorPower.HIGH);
+                                })
                                 .build();
 
                         Trajectory getNewRings = drive.trajectoryBuilder(goToShootOne.end())
@@ -135,7 +138,7 @@ public class CaramelAutonR extends LinearOpMode {
                                 .lineTo(new Vector2d(SHOOTING_X, SHOOTING_Y))
                                 .build();
 
-                        Trajectory parkOnLine = drive.trajectoryBuilder(goToShootTwo.end())
+                        Trajectory parkOnLine = drive.trajectoryBuilder(goToShootOne.end())
                                 .addDisplacementMarker(() -> {
                                     mech.setShooter(Mechanisms.motorPower.HIGH);
                                 })
@@ -144,34 +147,13 @@ public class CaramelAutonR extends LinearOpMode {
 
                         // Follow trajectories in order, may need to place functions
                         // between these instead of using markers
-                        drive.followTrajectory(dropWobbleGoal);
-
-                        mech.wobbleArmControl(Mechanisms.wobbleArmPos.DOWN);
-
-                        mech.wait(1500);
-
-                        mech.wobbleControl(Mechanisms.wobblePos.OPEN);
-
+                        //mech.wait(1000);
                         drive.followTrajectory(goToShootOne);
-
+                        mech.wait(2000);
                         mech.pushRings();
 
-                        if (detected.equals("SINGLE") || detected.equals("QUAD")) {
-                            drive.followTrajectory(getNewRings);
-
-                            drive.followTrajectory(goBackIntake);
-
-                            mech.wait(1000);
-
-                            drive.followTrajectory(goToShootTwo);
-
-                            mech.wait(1000);
-
-                            mech.pushRings();
-
-                        }
-
                         drive.followTrajectory(parkOnLine);
+
 
                         autonRunning = false;
                     }

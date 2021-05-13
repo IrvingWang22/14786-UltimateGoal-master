@@ -14,9 +14,9 @@ import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.nextcore.Mechanisms;
 
 @Config
-@TeleOp(name = "wobbleTeleOp")
+@TeleOp(name = "Rocky Road TeleOp")
 // ADVANCED EXPERIMENTAL CONTROL SCHEME
-public class wobbleTeleOp extends LinearOpMode {
+public class RockyTeleOp extends LinearOpMode {
 
     private Mechanisms.motorPower shooterPower = Mechanisms.motorPower.OFF;
 
@@ -69,17 +69,76 @@ public class wobbleTeleOp extends LinearOpMode {
 
              */
 
-            if (gamepad1.dpad_up) mech.wobbleArmControl(Mechanisms.wobbleArmPos.UP);
 
-            if (gamepad1.dpad_down) mech.wobbleArmControl(Mechanisms.wobbleArmPos.DOWN);
+            // Mechanisms
+            if (gamepad1.a) mech.wobbleControl(Mechanisms.wobblePos.CLOSE);
 
-            if (gamepad1.dpad_left) mech.wobbleControl(Mechanisms.wobblePos.OPEN);
+            if (gamepad1.b) mech.wobbleControl(Mechanisms.wobblePos.OPEN);
 
-            if (gamepad1.dpad_right) mech.wobbleControl(Mechanisms.wobblePos.CLOSE);
+            if (gamepad1.x) mech.runIntake(Mechanisms.intakeState.IN);
 
-            if (gamepad1.a) mech.wobbleTurretControl(Mechanisms.wobbleTurretPos.IN);
+            if (gamepad1.y) mech.runIntake(Mechanisms.intakeState.OFF);
 
-            if (gamepad1.b) mech.wobbleTurretControl(Mechanisms.wobbleTurretPos.OUT);
+            if (gamepad1.left_bumper) mech.setShooter(Mechanisms.motorPower.HIGH);
+
+            if (gamepad1.right_bumper) mech.setShooter(Mechanisms.motorPower.OFF);
+
+            if (gamepad1.right_trigger > 0.5) mech.pushRings();
+
+            if (gamepad1.left_trigger > 0.5) {
+
+                Trajectory setShootingPosition = drive.trajectoryBuilder(poseEstimate)
+                        .splineTo(new Vector2d(SHOOTING_X, SHOOTING_Y), targetAngle)
+                        .build();
+
+                drive.followTrajectoryAsync(setShootingPosition);
+
+            }
+
+            //if (gamepad1.dpad_up) mech.wobbleArmControl(Mechanisms.wobbleArmPos.UP);
+
+            //if (gamepad1.dpad_down) mech.wobbleArmControl(Mechanisms.wobbleArmPos.DOWN);
+
+            //if (gamepad1.dpad_left) mech.wobbleControl(Mechanisms.wobblePos.OPEN);
+
+            //if (gamepad1.dpad_right) mech.wobbleControl(Mechanisms.wobblePos.CLOSE);
+
+            if (gamepad2.dpad_up) mech.wobbleArmControl(Mechanisms.wobbleArmPos.UP);
+
+            if (gamepad2.dpad_down) mech.wobbleArmControl(Mechanisms.wobbleArmPos.DOWN);
+
+            if (gamepad2.dpad_left) mech.wobbleControl(Mechanisms.wobblePos.OPEN);
+
+            if (gamepad2.dpad_right) mech.wobbleControl(Mechanisms.wobblePos.CLOSE);
+
+            if (gamepad2.b) mech.wobbleTurretControl(Mechanisms.wobbleTurretPos.IN);
+
+            if (gamepad2.a) mech.wobbleTurretControl(Mechanisms.wobbleTurretPos.OUT);
+
+            //if (gamepad2.dpad_left) mech.wobbleTurretControl(Mechanisms.wobbleTurretPos.IN);
+
+            //if (gamepad2.dpad_right) mech.wobbleTurretControl(Mechanisms.wobbleTurretPos.OUT);
+
+            if (gamepad2.y) {
+                stickOne.setPosition(1);
+                telemetry.addLine("eeeeeee");
+                telemetry.addLine();
+            }
+
+            if (gamepad2.x) {
+                stickOne.setPosition(0.5);
+                telemetry.addLine("aaaaa");
+                telemetry.addLine();
+            }
+            if (gamepad2.left_bumper) {
+                Trajectory powershot = drive.trajectoryBuilder(poseEstimate)
+                        .splineTo(new Vector2d(POWSHOT1_X, POWSHOT1_Y), targetAngle)
+
+                        .build();
+
+
+                drive.followTrajectoryAsync(powershot);
+            }
 
 
             if ((poseEstimate.getX() < SHOOTING_X + SHOOT_RANGE
