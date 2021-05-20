@@ -50,6 +50,7 @@
     <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib:1.4.10" level="project" />
     <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-common:1.4.10" level="project" />
     <orderEntry type="library" name="Gradle: org.jetbrains:annotations:13.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.noahbres.jotai:jotai:1.0.2" level="project" />
     <orderEntry type="library" name="Gradle: com.acmerobotics.dashboard:dashboard:0.4.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: org.firstinspires.ftc:RobotCore:6.1.1@aar" level="project" />
     <orderEntry type="library" name="Gradle: org.firstinspires.ftc:RobotServer:6.1.1@aar" level="project" />

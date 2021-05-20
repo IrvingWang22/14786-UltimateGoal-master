@@ -36,24 +36,23 @@ public class Mechanisms {
     // Init Lists
 
     // Other Variables
-    public static int PUSH_RESTORE_TIME = 90;
+    public static int PUSH_RESTORE_TIME = 97 ;
 
     // Servo Positions
     public static double PUSH_MAX_VALUE = 0.23;
     public static double PUSH_MIN_VALUE = 0.39;
 
-    public static double WOBBLE_MAX_VALUE = 0.75;
+    public static double WOBBLE_MAX_VALUE = 0.5;
     public static double WOBBLE_MIN_VALUE = 0.01;
 
     public static double WOBBLE_CLAW_MIN_VALUE = 0.5;
-    public static double WOBBLE_CLAW_MAX_VALUE = 0.03;
+    public static double WOBBLE_CLAW_MAX_VALUE = 0.1;
 
-    public static double WOBBLE_TURRET_MAX_VALUE = 0.87
-            ;
+    public static double WOBBLE_TURRET_MAX_VALUE = 0.87;
     public static double WOBBLE_TURRET_MIN_VALUE = 0.1;
 
-    public static double STICK_MAX_VALUE = 0.2;
-    public static double STICK_MIN_VALUE = 0.1;
+    public static double STICK_MAX_VALUE = 0.5;
+    public static double STICK_MIN_VALUE = 1;
 
     public static double SHOOT_TPS = 1500;
     public static double POWERSHOT_TPS = 1300;
@@ -82,11 +81,11 @@ public class Mechanisms {
     }
 
     public enum stickOnePos {
-        IN, OUT
+        UP, DOWN
     }
 
     public enum stickTwoPos {
-        IN, OUT
+        UP, DOWN
     }
 
     // Power Values
@@ -133,14 +132,13 @@ public class Mechanisms {
         // Init initial Positions
         indexPush.setPosition(PUSH_MIN_VALUE);
 
-        wobbleControl(wobblePos.OPEN);
+        wobbleControl(wobblePos.CLOSE);
         wobbleArmControl(wobbleArmPos.UP);
         wobbleTurretControl(wobbleTurretPos.IN);
 
 
         //Set initial Position of Bars
-        //
-        //stickOneControl(stickOnePos.OUT);
+        stickOne.setPosition(0.8);
 
     }
 
@@ -178,19 +176,16 @@ public class Mechanisms {
         }
     }
 
+    // Hits rings three times into shooter
     public void pushRing() {
-        indexPush.setPosition(PUSH_MAX_VALUE);
-        wait(PUSH_RESTORE_TIME);
-        indexPush.setPosition(PUSH_MIN_VALUE);
-        wait(PUSH_RESTORE_TIME);
+        for (int i = 0; i < 1; i++) {
+            indexPush.setPosition(PUSH_MAX_VALUE);
+            wait(PUSH_RESTORE_TIME);
+            indexPush.setPosition(PUSH_MIN_VALUE);
+            wait(PUSH_RESTORE_TIME);
+        }
     }
 
-    public void pushOneRings() {
-        indexPush.setPosition(PUSH_MAX_VALUE);
-        wait(PUSH_RESTORE_TIME);
-        indexPush.setPosition(PUSH_MIN_VALUE);
-        wait(PUSH_RESTORE_TIME);
-    }
 
     public void wobbleControl(wobblePos pos) {
         switch (pos) {
@@ -233,10 +228,10 @@ public class Mechanisms {
 
     public void stickOneControl(stickOnePos pos) {
         switch (pos) {
-            case IN:
+            case UP:
                 stickOne.setPosition(STICK_MIN_VALUE);
                 break;
-            case OUT:
+            case DOWN:
                 stickOne.setPosition(STICK_MAX_VALUE);
                 break;
         }
@@ -244,10 +239,10 @@ public class Mechanisms {
 
     public void stickTwoControl(stickTwoPos pos) {
         switch (pos) {
-            case IN:
+            case UP:
                 stickTwo.setPosition(STICK_MIN_VALUE);
                 break;
-            case OUT:
+            case DOWN:
                 stickTwo.setPosition(STICK_MAX_VALUE);
                 break;
         }
