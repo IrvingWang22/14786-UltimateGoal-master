@@ -4,6 +4,7 @@ import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.acmerobotics.roadrunner.trajectory.Trajectory;
+import com.acmerobotics.roadrunner.trajectory.constraints.TrajectoryAccelerationConstraint;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
@@ -45,8 +46,14 @@ public class SightRed extends LinearOpMode {
     public static double RED_JUNCTION_X = -12;
     public static double RED_JUNCTION_Y = -12;
 
+    public static double RED_JUNCTION_X2 = 36;
+    public static double RED_JUNCTION_Y2 =  0;
+
+    public static double RED_JUNCTION_X3 = -53;
+    public static double RED_JUNCTION_Y3 =  -25;
+
     public static double RED_SHOOTING_X = -1;
-    public static double RED_SHOOTING_Y = -39;
+    public static double RED_SHOOTING_Y = -34;
 
     public static double RED_ENDING_X = LAUNCH_LINE_X; // STARTING X FOR TELEOP + ENDING X FOR AUTON
     public static double RED_ENDING_Y = RED_SHOOTING_Y; // STARTING Y FOR TELEOP + ENDING Y FOR AUTON
@@ -269,7 +276,7 @@ public class SightRed extends LinearOpMode {
                         drive.followTrajectory(park);
                            */
 
-                        Trajectory dropWobble = drive.trajectoryBuilder(startPose)
+                        Trajectory dropWobble1 = drive.trajectoryBuilder(startPose)
                                 .splineTo(new Vector2d(RED_JUNCTION_X, RED_JUNCTION_Y), Math.toRadians(0))
                                 .splineTo(new Vector2d(RED_WOBBLE_X, RED_WOBBLE_Y),Math.toRadians(0))
                                 .addDisplacementMarker(() -> {
@@ -277,8 +284,19 @@ public class SightRed extends LinearOpMode {
                                 })
                                 .build();
 
-                        Trajectory shootRings1 = drive.trajectoryBuilder(dropWobble.end())
-                                .lineTo(new Vector2d(RED_SHOOTING_X, RED_SHOOTING_Y))
+                        /*
+                        Trajectory dropWobble = drive.trajectoryBuilder(startPose)
+                                .splineTo(new Vector2d(RED_JUNCTION_X, RED_JUNCTION_Y), Math.toRadians(0))
+                                .splineTo(new Vector2d(RED_WOBBLE_X, RED_WOBBLE_Y),Math.toRadians(0))
+                                .addDisplacementMarker(() -> {
+                                    mech.setShooter(Mechanisms.motorPower.HIGH);
+                                })
+                                .build();
+                        */
+
+                        Trajectory shootRings1 = drive.trajectoryBuilder(dropWobble1.end())
+                                .splineToConstantHeading(new Vector2d(RED_JUNCTION_X2, RED_JUNCTION_Y2), Math.toRadians(0))
+                                .splineToConstantHeading(new Vector2d(RED_SHOOTING_X, RED_SHOOTING_Y), Math.toRadians(0))
                                 .build();
 
 
@@ -290,27 +308,30 @@ public class SightRed extends LinearOpMode {
                                 .build();
 
                         Trajectory shootRings2 = drive.trajectoryBuilder(intakeRings.end())
-                                .lineTo(new Vector2d(RED_SHOOTING_X, RED_SHOOTING_Y))
+                                .splineToConstantHeading(new Vector2d(RED_SHOOTING_X, RED_SHOOTING_Y), Math.toRadians(0))
                                 .build();
-
+                        /*
                         Trajectory getSecondWobble = drive.trajectoryBuilder(shootRings2.end())
-                                .splineToConstantHeading(new Vector2d(RED_SECOND_WOBBLE_X, RED_SECOND_WOBBLE_Y), Math.toRadians(0))
+                                .splineToConstantHeading(new Vector2d(RED_JUNCTION_X3, RED_JUNCTION_Y3), Math.toRadians(0))
                                 .build();
 
-                        Trajectory dropSecondWobble = drive.trajectoryBuilder(getSecondWobble.end())
-                                .lineTo(new Vector2d(RED_WOBBLE_X, RED_WOBBLE_Y))
+                        Trajectory getSecondWobble2 = drive.trajectoryBuilder(getSecondWobble.end())
+                                .strafeRight(20)
                                 .build();
 
+                         Trajectory dropSecondWobble = drive.trajectoryBuilder(getSecondWobble2.end())
+                                .splineToConstantHeading(new Vector2d(RED_JUNCTION_X2, RED_JUNCTION_Y2), Math.toRadians(0))
+                                .splineToConstantHeading(new Vector2d(RED_WOBBLE_X, RED_WOBBLE_Y), Math.toRadians(0))
+                                .build();
+                        */
                         Trajectory park = drive.trajectoryBuilder(shootRings2.end())
                                 .addDisplacementMarker(() -> {
                                     mech.setShooter(Mechanisms.motorPower.OFF);
                                 })
-                                .splineTo(new Vector2d(RED_ENDING_X, RED_ENDING_Y), Math.toRadians(0))
+                                .splineToConstantHeading(new Vector2d(RED_ENDING_X, RED_ENDING_Y), Math.toRadians(0))
                                 .build();
 
-                        drive.followTrajectory(dropWobble);
-
-                        drive.followTrajectory(dropWobble);
+                        drive.followTrajectory(dropWobble1);
 
                         mech.wait(500);
                         mech.wobbleArmControl(Mechanisms.wobbleArmPos.DOWN);
@@ -338,18 +359,23 @@ public class SightRed extends LinearOpMode {
                         mech.wait(500);
 
                         //drive to get second wobble
+                        /*
                         drive.followTrajectory(getSecondWobble);
                         //pick up second wobble
                         mech.wait(500);
                         mech.wobbleArmControl(Mechanisms.wobbleArmPos.DOWN);
                         mech.wait(500);
+                        drive.followTrajectory(getSecondWobble2);
+                        mech.wait(500);
                         mech.wobbleControl(Mechanisms.wobblePos.CLOSE);
                         mech.wait(500);
+
                         mech.wobbleArmControl(Mechanisms.wobbleArmPos.UP);
                         mech.wait(500);
 
                         //drive to drop second wobble
                         drive.followTrajectory(dropSecondWobble);
+
                         //drop second wobble
                         mech.wobbleArmControl(Mechanisms.wobbleArmPos.DOWN);
                         mech.wait(500);
@@ -357,6 +383,8 @@ public class SightRed extends LinearOpMode {
                         mech.wait(1000);
                         mech.wobbleArmControl(Mechanisms.wobbleArmPos.UP);
                         mech.wait(500);
+                           */
+                        drive.followTrajectory(park);
 
                         autonRunning = false;
                     }

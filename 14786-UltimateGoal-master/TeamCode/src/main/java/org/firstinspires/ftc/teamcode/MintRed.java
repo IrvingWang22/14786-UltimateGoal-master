@@ -26,7 +26,7 @@ public class MintRed extends LinearOpMode {
     public static double LAUNCH_LINE_X = 80 - MAX_VALUE + (TAPE_WIDTH / 2);
 
     public static double RED_SHOOTING_X = -1;
-    public static double RED_SHOOTING_Y = -39;
+    public static double RED_SHOOTING_Y = -44;
 
     public static double RED_ENDING_X = LAUNCH_LINE_X; // STARTING X FOR TELEOP + ENDING X FOR AUTON
     public static double RED_ENDING_Y = RED_SHOOTING_Y; // STARTING Y FOR TELEOP + ENDING Y FOR AUTON
@@ -167,6 +167,28 @@ public class MintRed extends LinearOpMode {
                         currentMode = Mode.AUTOMATIC_CONTROL;
                     }
                     */
+                    // autoalign highgoal
+                    /*
+                    if (gamepad2.a && gamepad2.x) {
+                        Trajectory traj = drive.trajectoryBuilder(poseEstimate)
+                                .splineTo(SHOOTING_POSITION, TARGET_ANGLE)
+                                .build();
+
+                        mech.setShooter(Mechanisms.motorPower.HIGH);
+                        mech.wait(1000);
+
+                        drive.followTrajectory(traj);
+                        telemetry.addLine("line up to goal");
+                        //mech.wait(1000);
+                        //mech.pushRings();
+                        mech.wait(1000);
+
+                        //mech.setShooter(Mechanisms.motorPower.OFF);
+
+                        currentMode = Mode.AUTOMATIC_CONTROL;
+                    }
+                    */
+
                     // TRIPLE Powershot
                     if (gamepad2.y && gamepad2.b) {
                         Trajectory traj = drive.trajectoryBuilder(poseEstimate)
@@ -183,24 +205,27 @@ public class MintRed extends LinearOpMode {
                         mech.wait(1000);
 
                         drive.followTrajectory(traj);
-                        telemetry.addLine("first traj");
+                        mech.wait(1000);
+                        /*
+                        telemetry.addLine("first powershot");
                         mech.wait(1000);
                         mech.pushRing();
                         mech.wait(1000);
 
                         drive.followTrajectory(traj2);
-                        telemetry.addLine("second traj");
+                        telemetry.addLine("second powershot");
                         mech.wait(500);
                         mech.pushRing();
                         mech.wait(500);
 
                         drive.followTrajectory(traj3);
-                        telemetry.addLine("third traj");
+                        telemetry.addLine("third powershot");
                         mech.wait(500);
                         mech.pushRing();
                         mech.wait(3000);
 
                         mech.setShooter(Mechanisms.motorPower.OFF);
+                           */
 
                         currentMode = Mode.AUTOMATIC_CONTROL;
                     }

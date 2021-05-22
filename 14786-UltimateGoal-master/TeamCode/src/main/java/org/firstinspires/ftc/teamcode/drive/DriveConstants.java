@@ -71,9 +71,9 @@ public class DriveConstants {
      * forces acceleration-limited profiling). All distance units are inches.
      */
 
-    public static double MAX_VEL = 87.222; //     public static double MAX_ANG_VEL = Math.toRadians(184.02607784577722);
+    public static double MAX_VEL = 52.48; //     public static double MAX_ANG_VEL = Math.toRadians(184.02607784577722);
 
-    public static double MAX_ACCEL = 87.222;
+    public static double MAX_ACCEL = 52.48;
     public static double MAX_ANG_VEL = Math.toRadians(184.02607784577722);
     public static double MAX_ANG_ACCEL = Math.toRadians(184.02607784577722);
 
