@@ -53,14 +53,14 @@ public class MotionRed extends LinearOpMode {
     public static double RED_ENDING_X = LAUNCH_LINE_X; // STARTING X FOR TELEOP + ENDING X FOR AUTON
     public static double RED_ENDING_Y = RED_SHOOTING_Y; // STARTING Y FOR TELEOP + ENDING Y FOR AUTON
 
-    public static double RED_WOBBLE_X_0 = HALF_TILE; //12
-    public static double RED_WOBBLE_Y_0 = -ONE_HALF_TILE; //-36
+    public static double RED_WOBBLE_X_0 = 0;
+    public static double RED_WOBBLE_Y_0 = -48;
 
-    public static double RED_WOBBLE_X_1 = ONE_HALF_TILE; //36
-    public static double RED_WOBBLE_Y_1 = -HALF_TILE; //-12
+    public static double RED_WOBBLE_X_1 = 24; //36
+    public static double RED_WOBBLE_Y_1 = -24; //-12
 
-    public static double RED_WOBBLE_X_4 = 2 * TILE + HALF_TILE; //60
-    public static double RED_WOBBLE_Y_4 = -ONE_HALF_TILE; //-12
+    public static double RED_WOBBLE_X_4 = 48; //60
+    public static double RED_WOBBLE_Y_4 = -48; //-12
 
     public double RED_WOBBLE_X, RED_WOBBLE_Y;
 
@@ -98,16 +98,17 @@ public class MotionRed extends LinearOpMode {
         }
 
         Trajectory dropWobble = drive.trajectoryBuilder(startPose)
-                .splineToConstantHeading(new Vector2d(RED_JUNCTION_X, RED_JUNCTION_Y), Math.toRadians(0))
-                .splineToConstantHeading(new Vector2d(RED_WOBBLE_X, RED_WOBBLE_Y), Math.toRadians(0))
+                .splineTo(new Vector2d(RED_JUNCTION_X, RED_JUNCTION_Y), Math.toRadians(0))
+                .splineTo(new Vector2d(RED_WOBBLE_X, RED_WOBBLE_Y),Math.toRadians(0))
                 .addDisplacementMarker(() -> {
                     mech.setShooter(Mechanisms.motorPower.HIGH);
                 })
                 .build();
 
+
         Trajectory shootRings1 = drive.trajectoryBuilder(dropWobble.end())
-                .splineToConstantHeading(new Vector2d(RED_JUNCTION_X2, RED_JUNCTION_Y2), Math.toRadians(0))
-                .splineToConstantHeading(new Vector2d(RED_SHOOTING_X, RED_SHOOTING_Y), Math.toRadians(0))
+                //.splineToConstantHeading(new Vector2d(RED_JUNCTION_X2, RED_JUNCTION_Y2), Math.toRadians(0))
+                .splineTo(new Vector2d(RED_SHOOTING_X, RED_SHOOTING_Y), Math.toRadians(0))
                 .build();
 
 
@@ -121,14 +122,26 @@ public class MotionRed extends LinearOpMode {
         Trajectory shootRings2 = drive.trajectoryBuilder(intakeRings.end())
                 .splineToConstantHeading(new Vector2d(RED_SHOOTING_X, RED_SHOOTING_Y), Math.toRadians(0))
                 .build();
+                        /*
+                        Trajectory getSecondWobble = drive.trajectoryBuilder(shootRings2.end())
+                                .splineToConstantHeading(new Vector2d(RED_JUNCTION_X3, RED_JUNCTION_Y3), Math.toRadians(0))
+                                .build();
 
+                        Trajectory getSecondWobble2 = drive.trajectoryBuilder(getSecondWobble.end())
+                                .strafeRight(20)
+                                .build();
+
+                         Trajectory dropSecondWobble = drive.trajectoryBuilder(getSecondWobble2.end())
+                                .splineToConstantHeading(new Vector2d(RED_JUNCTION_X2, RED_JUNCTION_Y2), Math.toRadians(0))
+                                .splineToConstantHeading(new Vector2d(RED_WOBBLE_X, RED_WOBBLE_Y), Math.toRadians(0))
+                                .build();
+                        */
         Trajectory park = drive.trajectoryBuilder(shootRings2.end())
                 .addDisplacementMarker(() -> {
                     mech.setShooter(Mechanisms.motorPower.OFF);
                 })
-                .splineTo(new Vector2d(RED_ENDING_X, RED_ENDING_Y), Math.toRadians(0))
+                .splineToConstantHeading(new Vector2d(RED_ENDING_X, RED_ENDING_Y), Math.toRadians(0))
                 .build();
-
 
         drive.followTrajectory(dropWobble);
 
@@ -156,7 +169,5 @@ public class MotionRed extends LinearOpMode {
         mech.wait(500);
         mech.pushRings();
         mech.wait(500);
-
-        drive.followTrajectory(park);
     }
 }

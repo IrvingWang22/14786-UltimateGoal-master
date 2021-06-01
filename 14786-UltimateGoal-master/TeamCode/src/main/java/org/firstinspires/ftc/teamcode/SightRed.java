@@ -58,16 +58,18 @@ public class SightRed extends LinearOpMode {
     public static double RED_ENDING_X = LAUNCH_LINE_X; // STARTING X FOR TELEOP + ENDING X FOR AUTON
     public static double RED_ENDING_Y = RED_SHOOTING_Y; // STARTING Y FOR TELEOP + ENDING Y FOR AUTON
 
-    public static double RED_WOBBLE_X_0 = HALF_TILE; //12
-    public static double RED_WOBBLE_Y_0 = -ONE_HALF_TILE; //-36
+    public static double RED_WOBBLE_X_0 = 0;
+    public static double RED_WOBBLE_Y_0 = -48; //-36
 
-    public static double RED_WOBBLE_X_1 = ONE_HALF_TILE; //36
-    public static double RED_WOBBLE_Y_1 = -HALF_TILE; //-12
+    public static double RED_WOBBLE_X_1 = 24; //36
+    public static double RED_WOBBLE_Y_1 = -24; //-12
 
-    public static double RED_WOBBLE_X_4 = 2 * TILE + HALF_TILE; //60
-    public static double RED_WOBBLE_Y_4 = -ONE_HALF_TILE; //-12
+    public static double RED_WOBBLE_X_4 = 48; //60
+    public static double RED_WOBBLE_Y_4 = -48; //-12
 
-    public double RED_WOBBLE_X, RED_WOBBLE_Y;
+    //default position on 0 ring
+    public double RED_WOBBLE_X = RED_WOBBLE_X_0;
+    public double RED_WOBBLE_Y = RED_WOBBLE_Y_0;
 
     public static double RED_SECOND_WOBBLE_X = -TILE*2;
     public static double RED_SECOND_WOBBLE_Y = -ONE_HALF_TILE; //36
@@ -79,6 +81,7 @@ public class SightRed extends LinearOpMode {
     public static double RED_POWERSHOT_Y_2 = -37;
     public static double RED_POWERSHOT_Y_3 = -42;
 
+    public static int AUTON_DELAY = 10000;
 
     private boolean autonRunning = true;
 
@@ -125,7 +128,7 @@ public class SightRed extends LinearOpMode {
                                 break;
                             } else {
                                 // NO RINGS
-                                telemetry.addLine("NONE FOUND");
+                                telemetry.addData("NONE FOUND", recognition.getConfidence());
                                 RED_WOBBLE_X = RED_WOBBLE_X_0;
                                 RED_WOBBLE_Y = RED_WOBBLE_Y_0;
                                 break;
@@ -276,15 +279,8 @@ public class SightRed extends LinearOpMode {
                         drive.followTrajectory(park);
                            */
 
-                        Trajectory dropWobble1 = drive.trajectoryBuilder(startPose)
-                                .splineTo(new Vector2d(RED_JUNCTION_X, RED_JUNCTION_Y), Math.toRadians(0))
-                                .splineTo(new Vector2d(RED_WOBBLE_X, RED_WOBBLE_Y),Math.toRadians(0))
-                                .addDisplacementMarker(() -> {
-                                    mech.setShooter(Mechanisms.motorPower.HIGH);
-                                })
-                                .build();
 
-                        /*
+
                         Trajectory dropWobble = drive.trajectoryBuilder(startPose)
                                 .splineTo(new Vector2d(RED_JUNCTION_X, RED_JUNCTION_Y), Math.toRadians(0))
                                 .splineTo(new Vector2d(RED_WOBBLE_X, RED_WOBBLE_Y),Math.toRadians(0))
@@ -292,10 +288,10 @@ public class SightRed extends LinearOpMode {
                                     mech.setShooter(Mechanisms.motorPower.HIGH);
                                 })
                                 .build();
-                        */
 
-                        Trajectory shootRings1 = drive.trajectoryBuilder(dropWobble1.end())
-                                .splineToConstantHeading(new Vector2d(RED_JUNCTION_X2, RED_JUNCTION_Y2), Math.toRadians(0))
+
+                        Trajectory shootRings1 = drive.trajectoryBuilder(dropWobble.end())
+                                //.splineToConstantHeading(new Vector2d(RED_JUNCTION_X2, RED_JUNCTION_Y2), Math.toRadians(0))
                                 .splineToConstantHeading(new Vector2d(RED_SHOOTING_X, RED_SHOOTING_Y), Math.toRadians(0))
                                 .build();
 
@@ -304,7 +300,10 @@ public class SightRed extends LinearOpMode {
                                 .addDisplacementMarker(() -> {
                                     mech.runIntake(Mechanisms.intakeState.IN);
                                 })
+                                
                                 .back(2 * TILE)
+                                SampleMecanumDrive.getVelocityConstraint(15, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH),
+                                SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL)
                                 .build();
 
                         Trajectory shootRings2 = drive.trajectoryBuilder(intakeRings.end())
@@ -331,8 +330,11 @@ public class SightRed extends LinearOpMode {
                                 .splineToConstantHeading(new Vector2d(RED_ENDING_X, RED_ENDING_Y), Math.toRadians(0))
                                 .build();
 
-                        drive.followTrajectory(dropWobble1);
+                        //initial delay
+                        mech.wait(AUTON_DELAY);
 
+                        //drop wobble
+                        drive.followTrajectory(dropWobble);
                         mech.wait(500);
                         mech.wobbleArmControl(Mechanisms.wobbleArmPos.DOWN);
                         mech.wait(500);
@@ -341,19 +343,19 @@ public class SightRed extends LinearOpMode {
                         mech.wobbleArmControl(Mechanisms.wobbleArmPos.UP);
                         mech.wait(500);
 
+                        //shoot first set of rings
                         drive.followTrajectory(shootRings1);
-
                         mech.wait(500);
                         mech.pushRings();
                         mech.wait(500);
 
+                        //collect new rings
                         drive.followTrajectory(intakeRings);
-
                         mech.wait(500);
                         mech.runIntake(Mechanisms.intakeState.OFF);
 
+                        //shoot second set of rings
                         drive.followTrajectory(shootRings2);
-
                         mech.wait(500);
                         mech.pushRings();
                         mech.wait(500);

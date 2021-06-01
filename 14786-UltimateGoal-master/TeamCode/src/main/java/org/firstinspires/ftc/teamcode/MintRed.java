@@ -195,7 +195,7 @@ public class MintRed extends LinearOpMode {
                                 .splineTo(POWERSHOT_POSITION1, TARGET_ANGLE)
                                 .build();
                         Trajectory traj2 = drive.trajectoryBuilder(traj.end())
-                                .strafeRight(RED_POWERSHOT_STRAFE_DISTANCE+2)
+                                .strafeRight(RED_POWERSHOT_STRAFE_DISTANCE+1)
                                 .build();
                         Trajectory traj3 = drive.trajectoryBuilder(traj2.end())
                                 .strafeRight(RED_POWERSHOT_STRAFE_DISTANCE+1)

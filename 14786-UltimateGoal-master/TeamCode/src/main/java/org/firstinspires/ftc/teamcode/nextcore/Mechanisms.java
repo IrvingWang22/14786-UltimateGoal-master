@@ -36,11 +36,11 @@ public class Mechanisms {
     // Init Lists
 
     // Other Variables
-    public static int PUSH_RESTORE_TIME = 97 ;
+    public static int PUSH_RESTORE_TIME = 100 ;
 
     // Servo Positions
-    public static double PUSH_MAX_VALUE = 0.23;
-    public static double PUSH_MIN_VALUE = 0.39;
+    public static double PUSH_MAX_VALUE = 0.29;
+    public static double PUSH_MIN_VALUE = 0.45;
 
     public static double WOBBLE_MAX_VALUE = 0.5;
     public static double WOBBLE_MIN_VALUE = 0.01;
@@ -168,7 +168,7 @@ public class Mechanisms {
 
     // Hits rings three times into shooter
     public void pushRings() {
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 5; i++) {
             indexPush.setPosition(PUSH_MAX_VALUE);
             wait(PUSH_RESTORE_TIME);
             indexPush.setPosition(PUSH_MIN_VALUE);

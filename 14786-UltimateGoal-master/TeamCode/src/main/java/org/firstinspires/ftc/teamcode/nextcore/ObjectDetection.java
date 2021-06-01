@@ -32,9 +32,9 @@ public class ObjectDetection {
     // Variables
     public static float CON_VALUE = 0.65f;
 
-    public static double MAGNIFICATION_VALUE = 1.5;
+    public static double MAGNIFICATION_VALUE = 1.3;
 
-    public static double ASPECT_RATIO_W = 4.0;
+    public static double ASPECT_RATIO_W = 5.0;
 
     public static double ASPECT_RATIO_H = 3.0;
 
