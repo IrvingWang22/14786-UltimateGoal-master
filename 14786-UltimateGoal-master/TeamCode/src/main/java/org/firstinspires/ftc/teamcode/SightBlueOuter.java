@@ -54,8 +54,8 @@ public class SightBlueOuter extends LinearOpMode {
     public static double BLUE_SHOOTING_X = -1;
     public static double BLUE_SHOOTING_Y = 34;
 
-    public static double BLUE_ENDING_X = LAUNCH_LINE_X; // STARTING X FOR TELEOP + ENDING X FOR AUTON
-    public static double BLUE_ENDING_Y = BLUE_SHOOTING_Y; // STARTING Y FOR TELEOP + ENDING Y FOR AUTON
+    public static double BLUE_ENDING_X = 16; // STARTING X FOR TELEOP + ENDING X FOR AUTON
+    public static double BLUE_ENDING_Y = 42; // STARTING Y FOR TELEOP + ENDING Y FOR AUTON
 
     public static double BLUE_WOBBLE_X_0 = 0;
     public static double BLUE_WOBBLE_Y_0 = 48;

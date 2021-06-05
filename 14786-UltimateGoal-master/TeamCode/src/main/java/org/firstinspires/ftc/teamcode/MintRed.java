@@ -233,7 +233,7 @@ public class MintRed extends LinearOpMode {
                 case AUTOMATIC_CONTROL:
                     // If x is pressed, we break out of the automatic following
                     if (gamepad1.start || gamepad1.start) {
-                        drive.cancelFollowing();
+                        //drive.cancelFollowing(); //FIX THIS
                         currentMode = Mode.DRIVER_CONTROL;
                     }
 

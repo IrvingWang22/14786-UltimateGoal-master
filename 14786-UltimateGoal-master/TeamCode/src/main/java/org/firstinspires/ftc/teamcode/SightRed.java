@@ -9,6 +9,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
+import org.firstinspires.ftc.teamcode.drive.DriveConstants;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.nextcore.Mechanisms;
 import org.firstinspires.ftc.teamcode.nextcore.ObjectDetection;
@@ -55,8 +56,10 @@ public class SightRed extends LinearOpMode {
     public static double RED_SHOOTING_X = -1;
     public static double RED_SHOOTING_Y = -34;
 
-    public static double RED_ENDING_X = LAUNCH_LINE_X; // STARTING X FOR TELEOP + ENDING X FOR AUTON 9
-    public static double RED_ENDING_Y = -60; // STARTING Y FOR TELEOP + ENDING Y FOR AUTON -60
+    public static double RED_INTAKE_Y = RED_SHOOTING_Y-(TILE*2);
+
+    public static double RED_ENDING_X = 16; // STARTING X FOR TELEOP + ENDING X FOR AUTON
+    public static double RED_ENDING_Y = -42; // STARTING Y FOR TELEOP + ENDING Y FOR AUTON
 
     public static double RED_WOBBLE_X_0 = 0;
     public static double RED_WOBBLE_Y_0 = -48;
@@ -155,10 +158,12 @@ public class SightRed extends LinearOpMode {
                                 .addDisplacementMarker(() -> {
                                     mech.runIntake(Mechanisms.intakeState.IN);
                                 })
+                                .strafeTo(
+                                        new Vector2d(RED_SHOOTING_X, RED_INTAKE_Y),
+                                        SampleMecanumDrive.getVelocityConstraint(15, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH),
+                                        SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL)
+                                )
 
-                                .back(2 * TILE)
-                                //SampleMecanumDrive.getVelocityConstraint(15, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH),
-                                //SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL)
                                 .build();
 
                         Trajectory shootRings2 = drive.trajectoryBuilder(intakeRings.end())
