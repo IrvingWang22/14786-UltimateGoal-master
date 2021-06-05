@@ -16,6 +16,10 @@ org/firstinspires/ftc/teamcode/drive/opmode/AutomaticFeedforwardTuner.java
  org.firstinspires.ftc.teamcode.drive.opmode.AutomaticFeedforwardTuner
 org/firstinspires/ftc/teamcode/drive/opmode/BackAndForth.java
  org.firstinspires.ftc.teamcode.drive.opmode.BackAndForth
+org/firstinspires/ftc/teamcode/SightRedOuter.java
+ org.firstinspires.ftc.teamcode.SightRedOuter
+org/firstinspires/ftc/teamcode/SightBlueOuter.java
+ org.firstinspires.ftc.teamcode.SightBlueOuter
 org/firstinspires/ftc/teamcode/TuningController.java
  org.firstinspires.ftc.teamcode.TuningController
  org.firstinspires.ftc.teamcode.TuningController$State
@@ -82,6 +86,8 @@ org/firstinspires/ftc/teamcode/drive/opmode/LocalizationTest.java
  org.firstinspires.ftc.teamcode.drive.opmode.LocalizationTest
 org/firstinspires/ftc/teamcode/tests/TestTrajectory.java
  org.firstinspires.ftc.teamcode.tests.TestTrajectory
+org/firstinspires/ftc/teamcode/SightBlueInner.java
+ org.firstinspires.ftc.teamcode.SightBlueInner
 org/firstinspires/ftc/teamcode/drive/SampleTankDrive.java
  org.firstinspires.ftc.teamcode.drive.SampleTankDrive
  org.firstinspires.ftc.teamcode.drive.SampleTankDrive$1
