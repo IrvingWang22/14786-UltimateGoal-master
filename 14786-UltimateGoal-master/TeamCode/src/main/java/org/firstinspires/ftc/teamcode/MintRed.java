@@ -26,20 +26,19 @@ public class MintRed extends LinearOpMode {
     public static double LAUNCH_LINE_X = 80 - MAX_VALUE + (TAPE_WIDTH / 2);
 
     public static double RED_SHOOTING_X = -1;
-    public static double RED_SHOOTING_Y = -44;
+    public static double RED_SHOOTING_Y = -34;
 
-    public static double RED_ENDING_X = LAUNCH_LINE_X; // STARTING X FOR TELEOP + ENDING X FOR AUTON
-    public static double RED_ENDING_Y = RED_SHOOTING_Y; // STARTING Y FOR TELEOP + ENDING Y FOR AUTON
+    public static double RED_ENDING_X = 16; // STARTING X FOR TELEOP + ENDING X FOR AUTON
+    public static double RED_ENDING_Y = -42; // STARTING Y FOR TELEOP + ENDING Y FOR AUTON
 
     // from left to right
-
     public static double RED_POWERSHOT_X = -2;
 
     public static double RED_POWERSHOT_Y_1 = -12;
     public static double RED_POWERSHOT_Y_2 = -13;
     public static double RED_POWERSHOT_Y_3 = -18;
 
-    public static double RED_POWERSHOT_STRAFE_DISTANCE = 6;
+    public static double RED_POWERSHOT_STRAFE_DISTANCE = 7;
 
     enum Mode {
         DRIVER_CONTROL,
@@ -88,6 +87,7 @@ public class MintRed extends LinearOpMode {
             switch (currentMode) {
                 case DRIVER_CONTROL:
                     // Gamepad 1 - Ian
+                    //Mecanum Drive (GAMEPAD1)
                     drive.setWeightedDrivePower(
                             new Pose2d(
                                     -gamepad1.left_stick_y,
@@ -96,109 +96,63 @@ public class MintRed extends LinearOpMode {
                             )
                     );
 
-                    // Top and Left Buttons
+                    //Intake States (GAMEPAD1)
                     if (gamepad1.x) mech.runIntake(Mechanisms.intakeState.IN);
                     if (gamepad1.b) mech.runIntake(Mechanisms.intakeState.OUT);
                     if (gamepad1.y) mech.runIntake(Mechanisms.intakeState.OFF);
 
+                    //Shoot Rings (GAMEPAD1)
+                    if (gamepad1.right_trigger > 0.5) mech.pushRings();
+                    if (gamepad1.left_trigger > 0.5) mech.pushRing();
 
+
+                    // Gamepad 2 - Michael/Atharv
+                    //Stick One Control (GAMEPAD2)
                     if (gamepad2.back) {
                         mech.stickOne.setPosition(0.8);
                         telemetry.addLine("50%");
                         telemetry.addLine();
                     }
-
                     if (gamepad2.start) {
                         mech.stickOne.setPosition(0.35);
                         telemetry.addLine("50%");
                         telemetry.addLine();
                     }
 
+                    //Wobble Arm (GAMEPAD2)
                     if (gamepad2.y) mech.wobbleArmControl(Mechanisms.wobbleArmPos.UP);
                     if (gamepad2.a) mech.wobbleArmControl(Mechanisms.wobbleArmPos.DOWN);
-                    //if (gamepad2.dpad_left) mech.wobbleArmControl(Mechanisms.wobbleArmPos.OVER);
-
-                    if (gamepad1.right_trigger > 0.5) mech.pushRings();
-                    if (gamepad1.left_trigger > 0.5) mech.pushRing();
-
                     if (gamepad2.b) mech.wobbleControl(Mechanisms.wobblePos.OPEN);
                     if (gamepad2.x) mech.wobbleControl(Mechanisms.wobblePos.CLOSE);
 
-                    // Gamepad 2 - Michael/Atharv
+                    //Shooter Speeds (GAMEPAD2)
                     if (gamepad2.dpad_up) mech.setShooter(Mechanisms.motorPower.HIGH);
                     if (gamepad2.dpad_down) mech.setShooter(Mechanisms.motorPower.OFF);
                     if (gamepad2.dpad_left) mech.setShooter(Mechanisms.motorPower.MED);
+                    if (gamepad2.dpad_right) mech.setShooter(Mechanisms.motorPower.LOW);
 
-                    /*
-                    if (gamepad2.left_bumper) {
-                        Trajectory traj = drive.trajectoryBuilder(poseEstimate)
-                                .splineTo(POWERSHOT_1, TARGET_ANGLE)
-                                .build();
 
-                        drive.followTrajectoryAsync(traj);
-
-                        currentMode = Mode.AUTOMATIC_CONTROL;
-
-                    //} else if (gamepad2.dpad_right) {
-                        //Trajectory traj = drive.trajectoryBuilder(poseEstimate);
-                        //drive.followTrajectoryAsync(traj);
-
-                        currentMode = Mode.AUTOMATIC_CONTROL;
-
-                    } else if (gamepad2.left_bumper) {
-                        Trajectory traj = drive.trajectoryBuilder(poseEstimate)
-                                .splineTo(POWERSHOT_3, TARGET_ANGLE)
-                                .build();
-
-                        drive.followTrajectoryAsync(traj);
-
-                                //.splineTo(POWERSHOT_2, TARGET_ANGLE)
-                                //.build();
-
-                        currentMode = Mode.AUTOMATIC_CONTROL;
-
-                    } else if (gamepad2.right_bumper) {
+                    //AUTOMATIC CONTROL (GAMEPAD1)
+                    //High Goal
+                    if (gamepad1.right_bumper) {
                         Trajectory traj = drive.trajectoryBuilder(poseEstimate)
                                 .splineTo(SHOOTING_POSITION, TARGET_ANGLE)
                                 .build();
-
-                        drive.followTrajectoryAsync(traj);
-
-                        currentMode = Mode.AUTOMATIC_CONTROL;
-                    }
-                    */
-                    // autoalign highgoal
-                    /*
-                    if (gamepad2.a && gamepad2.x) {
-                        Trajectory traj = drive.trajectoryBuilder(poseEstimate)
-                                .splineTo(SHOOTING_POSITION, TARGET_ANGLE)
-                                .build();
-
-                        mech.setShooter(Mechanisms.motorPower.HIGH);
-                        mech.wait(1000);
-
                         drive.followTrajectory(traj);
-                        telemetry.addLine("line up to goal");
-                        //mech.wait(1000);
-                        //mech.pushRings();
-                        mech.wait(1000);
-
-                        //mech.setShooter(Mechanisms.motorPower.OFF);
 
                         currentMode = Mode.AUTOMATIC_CONTROL;
                     }
-                    */
 
                     // TRIPLE Powershot
-                    if (gamepad2.y && gamepad2.b) {
+                    if (gamepad1.left_bumper) {
                         Trajectory traj = drive.trajectoryBuilder(poseEstimate)
                                 .splineTo(POWERSHOT_POSITION1, TARGET_ANGLE)
                                 .build();
                         Trajectory traj2 = drive.trajectoryBuilder(traj.end())
-                                .strafeRight(RED_POWERSHOT_STRAFE_DISTANCE+1)
+                                .strafeRight(RED_POWERSHOT_STRAFE_DISTANCE)
                                 .build();
                         Trajectory traj3 = drive.trajectoryBuilder(traj2.end())
-                                .strafeRight(RED_POWERSHOT_STRAFE_DISTANCE+1)
+                                .strafeRight(RED_POWERSHOT_STRAFE_DISTANCE)
                                 .build();
 
                         mech.setShooter(Mechanisms.motorPower.MED);
@@ -229,11 +183,12 @@ public class MintRed extends LinearOpMode {
 
                         currentMode = Mode.AUTOMATIC_CONTROL;
                     }
+
                     break;
                 case AUTOMATIC_CONTROL:
                     // If x is pressed, we break out of the automatic following
                     if (gamepad1.start || gamepad1.start) {
-                        //drive.cancelFollowing(); //FIX THIS
+                        drive.cancelFollowing();
                         currentMode = Mode.DRIVER_CONTROL;
                     }
 

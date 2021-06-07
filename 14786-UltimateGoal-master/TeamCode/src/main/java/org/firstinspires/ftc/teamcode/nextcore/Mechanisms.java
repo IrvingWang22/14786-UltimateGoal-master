@@ -14,7 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Config
-public class Mechanisms {
+public class  Mechanisms {
     // Init Objects
     public ElapsedTime runtime = new ElapsedTime();
 
@@ -54,13 +54,14 @@ public class Mechanisms {
     public static double STICK_MAX_VALUE = 0.5;
     public static double STICK_MIN_VALUE = 1;
 
-    public static double SHOOT_TPS = 1500;
-    public static double POWERSHOT_TPS = 1300;
+    public static double SHOOT_TPS = 1500; //HIGH speed
+    public static double POWERSHOT_TPS = 1300; //MED speed
+    public static double MIDDLEGOAL_TPS = 1300; //LOW speed
 
 
     // Power Enum
     public enum motorPower {
-        HIGH, STALL, OFF, MED
+        HIGH, STALL, OFF, MED, LOW
     }
 
     public enum intakeState {
@@ -156,6 +157,10 @@ public class Mechanisms {
             case MED:
                 shooterOne.setVelocity(POWERSHOT_TPS);
                 shooterTwo.setVelocity(POWERSHOT_TPS);
+                break;
+            case LOW:
+                shooterOne.setVelocity(MIDDLEGOAL_TPS);
+                shooterTwo.setVelocity(MIDDLEGOAL_TPS);
                 break;
 
             default:

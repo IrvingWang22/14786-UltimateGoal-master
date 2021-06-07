@@ -1,28 +1,86 @@
 org/firstinspires/ftc/teamcode/drive/opmode/TrackWidthTuner.java
  org.firstinspires.ftc.teamcode.drive.opmode.TrackWidthTuner
-org/firstinspires/ftc/teamcode/drive/opmode/DriveVelocityPIDTuner.java
- org.firstinspires.ftc.teamcode.drive.opmode.DriveVelocityPIDTuner
- org.firstinspires.ftc.teamcode.drive.opmode.DriveVelocityPIDTuner$1
- org.firstinspires.ftc.teamcode.drive.opmode.DriveVelocityPIDTuner$Mode
 org/firstinspires/ftc/teamcode/tests/WobbleTest.java
  org.firstinspires.ftc.teamcode.tests.WobbleTest
+org/firstinspires/ftc/teamcode/trajectorysequence/sequencesegment/WaitSegment.java
+ org.firstinspires.ftc.teamcode.trajectorysequence.sequencesegment.WaitSegment
 org/firstinspires/ftc/teamcode/tests/IntakeTest.java
  org.firstinspires.ftc.teamcode.tests.IntakeTest
 org/firstinspires/ftc/teamcode/SightRed.java
  org.firstinspires.ftc.teamcode.SightRed
-org/firstinspires/ftc/teamcode/tests/TestingOdometry1.java
- org.firstinspires.ftc.teamcode.tests.TestingOdometry1
-org/firstinspires/ftc/teamcode/drive/opmode/AutomaticFeedforwardTuner.java
- org.firstinspires.ftc.teamcode.drive.opmode.AutomaticFeedforwardTuner
 org/firstinspires/ftc/teamcode/drive/opmode/BackAndForth.java
  org.firstinspires.ftc.teamcode.drive.opmode.BackAndForth
-org/firstinspires/ftc/teamcode/SightRedOuter.java
- org.firstinspires.ftc.teamcode.SightRedOuter
+org/firstinspires/ftc/teamcode/drive/opmode/MotorDirectionDebugger.java
+ org.firstinspires.ftc.teamcode.drive.opmode.MotorDirectionDebugger
 org/firstinspires/ftc/teamcode/SightBlueOuter.java
  org.firstinspires.ftc.teamcode.SightBlueOuter
 org/firstinspires/ftc/teamcode/TuningController.java
  org.firstinspires.ftc.teamcode.TuningController
  org.firstinspires.ftc.teamcode.TuningController$State
+org/firstinspires/ftc/teamcode/drive/opmode/MaxAngularVeloTuner.java
+ org.firstinspires.ftc.teamcode.drive.opmode.MaxAngularVeloTuner
+org/firstinspires/ftc/teamcode/trajectorysequence/sequencesegment/TrajectorySegment.java
+ org.firstinspires.ftc.teamcode.trajectorysequence.sequencesegment.TrajectorySegment
+org/firstinspires/ftc/teamcode/trajectorysequence/TrajectorySequenceBuilder.java
+ org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequenceBuilder
+ org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequenceBuilder$1ComparingPoints
+ org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequenceBuilder$AddPathCallback
+org/firstinspires/ftc/teamcode/trajectorysequence/TrajectorySequenceRunner.java
+ org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequenceRunner
+org/firstinspires/ftc/teamcode/drive/opmode/StraightTest.java
+ org.firstinspires.ftc.teamcode.drive.opmode.StraightTest
+org/firstinspires/ftc/teamcode/util/BNO055IMUUtil.java
+ org.firstinspires.ftc.teamcode.util.BNO055IMUUtil
+org/firstinspires/ftc/teamcode/drive/opmode/TrackingWheelForwardOffsetTuner.java
+ org.firstinspires.ftc.teamcode.drive.opmode.TrackingWheelForwardOffsetTuner
+org/firstinspires/ftc/teamcode/util/Encoder.java
+ org.firstinspires.ftc.teamcode.util.Encoder
+ org.firstinspires.ftc.teamcode.util.Encoder$Direction
+org/firstinspires/ftc/teamcode/util/LynxModuleUtil.java
+ org.firstinspires.ftc.teamcode.util.LynxModuleUtil
+ org.firstinspires.ftc.teamcode.util.LynxModuleUtil$LynxFirmwareVersion
+ org.firstinspires.ftc.teamcode.util.LynxModuleUtil$LynxFirmwareVersionException
+org/firstinspires/ftc/teamcode/drive/SampleMecanumDrive.java
+ org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive
+org/firstinspires/ftc/teamcode/tests/ServoTest.java
+ org.firstinspires.ftc.teamcode.tests.ServoTest
+org/firstinspires/ftc/teamcode/drive/opmode/SplineTest.java
+ org.firstinspires.ftc.teamcode.drive.opmode.SplineTest
+org/firstinspires/ftc/teamcode/trajectorysequence/sequencesegment/TurnSegment.java
+ org.firstinspires.ftc.teamcode.trajectorysequence.sequencesegment.TurnSegment
+org/firstinspires/ftc/teamcode/drive/StandardTrackingWheelLocalizer.java
+ org.firstinspires.ftc.teamcode.drive.StandardTrackingWheelLocalizer
+org/firstinspires/ftc/teamcode/nextcore/ObjectDetection.java
+ org.firstinspires.ftc.teamcode.nextcore.ObjectDetection
+ org.firstinspires.ftc.teamcode.nextcore.ObjectDetection$OBJECT
+org/firstinspires/ftc/teamcode/tests/TestingOdometry2.java
+ org.firstinspires.ftc.teamcode.tests.TestingOdometry2
+org/firstinspires/ftc/teamcode/tests/TestTrajectory.java
+ org.firstinspires.ftc.teamcode.tests.TestTrajectory
+org/firstinspires/ftc/teamcode/SightBlueInner.java
+ org.firstinspires.ftc.teamcode.SightBlueInner
+org/firstinspires/ftc/teamcode/drive/SampleTankDrive.java
+ org.firstinspires.ftc.teamcode.drive.SampleTankDrive
+org/firstinspires/ftc/teamcode/drive/DriveConstants.java
+ org.firstinspires.ftc.teamcode.drive.DriveConstants
+org/firstinspires/ftc/teamcode/tests/VelShooter.java
+ org.firstinspires.ftc.teamcode.tests.VelShooter
+org/firstinspires/ftc/teamcode/VelocityPIDFController.java
+ org.firstinspires.ftc.teamcode.VelocityPIDFController
+org/firstinspires/ftc/teamcode/MotionRed.java
+ org.firstinspires.ftc.teamcode.MotionRed
+org/firstinspires/ftc/teamcode/drive/opmode/FollowerPIDTuner.java
+ org.firstinspires.ftc.teamcode.drive.opmode.FollowerPIDTuner
+org/firstinspires/ftc/teamcode/drive/opmode/DriveVelocityPIDTuner.java
+ org.firstinspires.ftc.teamcode.drive.opmode.DriveVelocityPIDTuner
+ org.firstinspires.ftc.teamcode.drive.opmode.DriveVelocityPIDTuner$1
+ org.firstinspires.ftc.teamcode.drive.opmode.DriveVelocityPIDTuner$Mode
+org/firstinspires/ftc/teamcode/tests/TestingOdometry1.java
+ org.firstinspires.ftc.teamcode.tests.TestingOdometry1
+org/firstinspires/ftc/teamcode/drive/opmode/AutomaticFeedforwardTuner.java
+ org.firstinspires.ftc.teamcode.drive.opmode.AutomaticFeedforwardTuner
+org/firstinspires/ftc/teamcode/SightRedOuter.java
+ org.firstinspires.ftc.teamcode.SightRedOuter
 org/firstinspires/ftc/teamcode/nextcore/Mechanisms.java
  org.firstinspires.ftc.teamcode.nextcore.Mechanisms
  org.firstinspires.ftc.teamcode.nextcore.Mechanisms$1
@@ -35,19 +93,16 @@ org/firstinspires/ftc/teamcode/nextcore/Mechanisms.java
  org.firstinspires.ftc.teamcode.nextcore.Mechanisms$wobbleTurretPos
 org/firstinspires/ftc/teamcode/drive/opmode/TurnTest.java
  org.firstinspires.ftc.teamcode.drive.opmode.TurnTest
-org/firstinspires/ftc/teamcode/drive/opmode/MaxAngularVelocityTuner.java
- org.firstinspires.ftc.teamcode.drive.opmode.MaxAngularVelocityTuner
- org.firstinspires.ftc.teamcode.drive.opmode.MaxAngularVelocityTuner$MaxVelocityTuner
 org/firstinspires/ftc/teamcode/util/RegressionUtil.java
  org.firstinspires.ftc.teamcode.util.RegressionUtil
  org.firstinspires.ftc.teamcode.util.RegressionUtil$AccelResult
  org.firstinspires.ftc.teamcode.util.RegressionUtil$RampResult
-org/firstinspires/ftc/teamcode/drive/opmode/StraightTest.java
- org.firstinspires.ftc.teamcode.drive.opmode.StraightTest
+org/firstinspires/ftc/teamcode/trajectorysequence/EmptySequenceException.java
+ org.firstinspires.ftc.teamcode.trajectorysequence.EmptySequenceException
 org/firstinspires/ftc/teamcode/drive/opmode/TrackingWheelLateralDistanceTuner.java
  org.firstinspires.ftc.teamcode.drive.opmode.TrackingWheelLateralDistanceTuner
-org/firstinspires/ftc/teamcode/util/BNO055IMUUtil.java
- org.firstinspires.ftc.teamcode.util.BNO055IMUUtil
+org/firstinspires/ftc/teamcode/trajectorysequence/TrajectorySequence.java
+ org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence
 org/firstinspires/ftc/teamcode/util/AssetsTrajectoryManager.java
  org.firstinspires.ftc.teamcode.util.AssetsTrajectoryManager
 org/firstinspires/ftc/teamcode/tests/RingDetector.java
@@ -56,52 +111,18 @@ org/firstinspires/ftc/teamcode/drive/opmode/ManualFeedforwardTuner.java
  org.firstinspires.ftc.teamcode.drive.opmode.ManualFeedforwardTuner
  org.firstinspires.ftc.teamcode.drive.opmode.ManualFeedforwardTuner$1
  org.firstinspires.ftc.teamcode.drive.opmode.ManualFeedforwardTuner$Mode
-org/firstinspires/ftc/teamcode/util/Encoder.java
- org.firstinspires.ftc.teamcode.util.Encoder
- org.firstinspires.ftc.teamcode.util.Encoder$Direction
-org/firstinspires/ftc/teamcode/util/LynxModuleUtil.java
- org.firstinspires.ftc.teamcode.util.LynxModuleUtil
- org.firstinspires.ftc.teamcode.util.LynxModuleUtil$LynxFirmwareVersion
- org.firstinspires.ftc.teamcode.util.LynxModuleUtil$LynxFirmwareVersionException
-org/firstinspires/ftc/teamcode/drive/SampleMecanumDrive.java
- org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive
- org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive$1
- org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive$Mode
-org/firstinspires/ftc/teamcode/tests/ServoTest.java
- org.firstinspires.ftc.teamcode.tests.ServoTest
-org/firstinspires/ftc/teamcode/drive/opmode/SplineTest.java
- org.firstinspires.ftc.teamcode.drive.opmode.SplineTest
-org/firstinspires/ftc/teamcode/drive/StandardTrackingWheelLocalizer.java
- org.firstinspires.ftc.teamcode.drive.StandardTrackingWheelLocalizer
-org/firstinspires/ftc/teamcode/nextcore/ObjectDetection.java
- org.firstinspires.ftc.teamcode.nextcore.ObjectDetection
- org.firstinspires.ftc.teamcode.nextcore.ObjectDetection$OBJECT
 org/firstinspires/ftc/teamcode/util/LoggingUtil.java
  org.firstinspires.ftc.teamcode.util.LoggingUtil
-org/firstinspires/ftc/teamcode/tests/TestingOdometry2.java
- org.firstinspires.ftc.teamcode.tests.TestingOdometry2
 org/firstinspires/ftc/teamcode/util/AxesSigns.java
  org.firstinspires.ftc.teamcode.util.AxesSigns
 org/firstinspires/ftc/teamcode/drive/opmode/LocalizationTest.java
  org.firstinspires.ftc.teamcode.drive.opmode.LocalizationTest
-org/firstinspires/ftc/teamcode/tests/TestTrajectory.java
- org.firstinspires.ftc.teamcode.tests.TestTrajectory
-org/firstinspires/ftc/teamcode/SightBlueInner.java
- org.firstinspires.ftc.teamcode.SightBlueInner
-org/firstinspires/ftc/teamcode/drive/SampleTankDrive.java
- org.firstinspires.ftc.teamcode.drive.SampleTankDrive
- org.firstinspires.ftc.teamcode.drive.SampleTankDrive$1
- org.firstinspires.ftc.teamcode.drive.SampleTankDrive$Mode
+org/firstinspires/ftc/teamcode/trajectorysequence/sequencesegment/SequenceSegment.java
+ org.firstinspires.ftc.teamcode.trajectorysequence.sequencesegment.SequenceSegment
 org/firstinspires/ftc/teamcode/tests/FastShooter.java
  org.firstinspires.ftc.teamcode.tests.FastShooter
-org/firstinspires/ftc/teamcode/drive/DriveConstants.java
- org.firstinspires.ftc.teamcode.drive.DriveConstants
 org/firstinspires/ftc/teamcode/ShooterPID.java
  org.firstinspires.ftc.teamcode.ShooterPID
-org/firstinspires/ftc/teamcode/tests/VelShooter.java
- org.firstinspires.ftc.teamcode.tests.VelShooter
-org/firstinspires/ftc/teamcode/VelocityPIDFController.java
- org.firstinspires.ftc.teamcode.VelocityPIDFController
 org/firstinspires/ftc/teamcode/drive/opmode/StrafeTest.java
  org.firstinspires.ftc.teamcode.drive.opmode.StrafeTest
 org/firstinspires/ftc/teamcode/util/DashboardUtil.java
@@ -112,7 +133,3 @@ org/firstinspires/ftc/teamcode/MintRed.java
  org.firstinspires.ftc.teamcode.MintRed
  org.firstinspires.ftc.teamcode.MintRed$1
  org.firstinspires.ftc.teamcode.MintRed$Mode
-org/firstinspires/ftc/teamcode/MotionRed.java
- org.firstinspires.ftc.teamcode.MotionRed
-org/firstinspires/ftc/teamcode/drive/opmode/FollowerPIDTuner.java
- org.firstinspires.ftc.teamcode.drive.opmode.FollowerPIDTuner
