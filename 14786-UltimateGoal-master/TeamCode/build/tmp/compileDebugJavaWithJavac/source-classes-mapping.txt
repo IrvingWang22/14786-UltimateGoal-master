@@ -42,6 +42,8 @@ org/firstinspires/ftc/teamcode/util/LynxModuleUtil.java
  org.firstinspires.ftc.teamcode.util.LynxModuleUtil$LynxFirmwareVersionException
 org/firstinspires/ftc/teamcode/drive/SampleMecanumDrive.java
  org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive
+ org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive$1
+ org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive$Mode
 org/firstinspires/ftc/teamcode/tests/ServoTest.java
  org.firstinspires.ftc.teamcode.tests.ServoTest
 org/firstinspires/ftc/teamcode/drive/opmode/SplineTest.java

@@ -141,10 +141,10 @@ public class SightRed extends LinearOpMode {
                         telemetry.update();
 
                         Trajectory dropWobble = drive.trajectoryBuilder(startPose)
-                                .splineTo(new Vector2d(RED_JUNCTION_X, RED_JUNCTION_Y), Math.toRadians(0))
-                                .splineTo(new Vector2d(RED_WOBBLE_X, RED_WOBBLE_Y),Math.toRadians(0))
+                                .splineToConstantHeading(new Vector2d(RED_JUNCTION_X, RED_JUNCTION_Y), Math.toRadians(0))
+                                .splineToConstantHeading(new Vector2d(RED_WOBBLE_X, RED_WOBBLE_Y),Math.toRadians(0))
                                 .addDisplacementMarker(() -> {
-                                    mech.setShooter(Mechanisms.motorPower.HIGH);
+                                    //mech.setShooter(Mechanisms.motorPower.HIGH);
                                 })
                                 .build();
 
@@ -181,16 +181,17 @@ public class SightRed extends LinearOpMode {
                                 .splineToConstantHeading(new Vector2d(RED_WOBBLE_X, RED_WOBBLE_Y), Math.toRadians(0))
                                 .build();
                         */
-                        Trajectory park = drive.trajectoryBuilder(shootRings2.end())
+                        Trajectory park = drive.trajectoryBuilder(startPose) //TEMP
                                 .addDisplacementMarker(() -> {
                                     mech.setShooter(Mechanisms.motorPower.OFF);
                                 })
-                                .splineToConstantHeading(new Vector2d(RED_ENDING_X, RED_ENDING_Y), Math.toRadians(0))
+                                //.splineToConstantHeading(new Vector2d(RED_ENDING_X, RED_ENDING_Y), Math.toRadians(0))
+                                .strafeLeft(40)
                                 .build();
 
                         //initial delay
                         //mech.wait(AUTON_DELAY);
-
+                        /* DISABLED DUE TO ODOMETRY
                         //drop wobble
                         drive.followTrajectory(dropWobble);
                         mech.wait(500);
@@ -217,6 +218,7 @@ public class SightRed extends LinearOpMode {
                         mech.wait(500);
                         mech.pushRings();
                         mech.wait(500);
+                        */
 
                         //drive to get second wobble
                         /*

@@ -140,7 +140,7 @@ public class SightRedOuter extends LinearOpMode {
                                 .splineToConstantHeading(new Vector2d(RED_JUNCTION_X, RED_JUNCTION_Y), Math.toRadians(0))
                                 .splineToConstantHeading(new Vector2d(RED_WOBBLE_X, RED_WOBBLE_Y),Math.toRadians(0))
                                 .addDisplacementMarker(() -> {
-                                    mech.setShooter(Mechanisms.motorPower.HIGH);
+                                    //mech.setShooter(Mechanisms.motorPower.HIGH);
                                 })
                                 .build();
 
@@ -175,7 +175,7 @@ public class SightRedOuter extends LinearOpMode {
                                 .splineToConstantHeading(new Vector2d(RED_WOBBLE_X, RED_WOBBLE_Y), Math.toRadians(0))
                                 .build();
                         */
-                        Trajectory park = drive.trajectoryBuilder(shootRings2.end())
+                        Trajectory park = drive.trajectoryBuilder(dropWobble.end()) //TEMP
                                 .addDisplacementMarker(() -> {
                                     mech.setShooter(Mechanisms.motorPower.OFF);
                                 })
@@ -196,6 +196,7 @@ public class SightRedOuter extends LinearOpMode {
                         mech.wait(500);
 
                         //shoot first set of rings
+                        /*DISABLED DUE TO ODOMETRY
                         drive.followTrajectory(shootRings1);
                         mech.wait(500);
                         mech.pushRings();
@@ -211,7 +212,7 @@ public class SightRedOuter extends LinearOpMode {
                         mech.wait(500);
                         mech.pushRings();
                         mech.wait(500);
-
+                        */
                         //drive to get second wobble
                         /*
                         drive.followTrajectory(getSecondWobble);

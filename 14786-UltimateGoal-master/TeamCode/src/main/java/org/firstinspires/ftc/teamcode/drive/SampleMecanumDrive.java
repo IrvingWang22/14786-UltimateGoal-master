@@ -126,7 +126,7 @@ public class SampleMecanumDrive extends MecanumDrive {
         accelConstraint = getAccelerationConstraint(MAX_ACCEL);
 
         follower = new HolonomicPIDVAFollower(TRANSLATIONAL_PID, TRANSLATIONAL_PID, HEADING_PID,
-                new Pose2d(0.5, 0.5, Math.toRadians(5.0)), 1.0);
+                new Pose2d(0.5, 0.5, Math.toRadians(5.0)), 1.5);
 
         poseHistory = new LinkedList<>();
 
@@ -197,6 +197,14 @@ public class SampleMecanumDrive extends MecanumDrive {
         return new TrajectoryBuilder(startPose, startHeading, velConstraint, accelConstraint);
     }
 
+    public TrajectorySequenceBuilder trajectorySequenceBuilder(Pose2d startPose) {
+        return new TrajectorySequenceBuilder(
+                startPose,
+                VEL_CONSTRAINT, ACCEL_CONSTRAINT,
+                MAX_ANG_VEL, MAX_ANG_ACCEL
+        );
+    }
+
     public void turnAsync(double angle) {
         double heading = getPoseEstimate().getHeading();
 
@@ -225,6 +233,15 @@ public class SampleMecanumDrive extends MecanumDrive {
 
     public void followTrajectory(Trajectory trajectory) {
         followTrajectoryAsync(trajectory);
+        waitForIdle();
+    }
+
+    public void followTrajectorySequenceAsync(TrajectorySequence trajectorySequence) {
+        trajectorySequenceRunner.followTrajectorySequenceAsync(trajectorySequence);
+    }
+
+    public void followTrajectorySequence(TrajectorySequence trajectorySequence) {
+        followTrajectorySequenceAsync(trajectorySequence);
         waitForIdle();
     }
 

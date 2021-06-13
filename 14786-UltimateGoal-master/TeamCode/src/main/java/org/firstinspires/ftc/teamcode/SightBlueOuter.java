@@ -144,10 +144,10 @@ public class SightBlueOuter extends LinearOpMode {
                         telemetry.update();
 
                         Trajectory dropWobble = drive.trajectoryBuilder(startPose)
-                                .splineTo(new Vector2d(BLUE_JUNCTION_X, BLUE_JUNCTION_Y), Math.toRadians(0))
+                                .splineToConstantHeading(new Vector2d(BLUE_JUNCTION_X, BLUE_JUNCTION_Y), Math.toRadians(0))
                                 .splineTo(new Vector2d(BLUE_WOBBLE_X, BLUE_WOBBLE_Y),BLUE_WOBBLE_HEADING)
                                 .addDisplacementMarker(() -> {
-                                    mech.setShooter(Mechanisms.motorPower.HIGH);
+                                    //mech.setShooter(Mechanisms.motorPower.HIGH);
                                 })
                                 .build();
 
@@ -182,11 +182,11 @@ public class SightBlueOuter extends LinearOpMode {
                                 .splineToConstantHeading(new Vector2d(RED_WOBBLE_X, RED_WOBBLE_Y), Math.toRadians(0))
                                 .build();
                         */
-                        Trajectory park = drive.trajectoryBuilder(shootRings2.end())
+                        Trajectory park = drive.trajectoryBuilder(dropWobble.end()) //TEMP
                                 .addDisplacementMarker(() -> {
                                     mech.setShooter(Mechanisms.motorPower.OFF);
                                 })
-                                .splineToConstantHeading(new Vector2d(BLUE_ENDING_X, BLUE_ENDING_Y), Math.toRadians(0))
+                                .splineTo(new Vector2d(BLUE_ENDING_X, BLUE_ENDING_Y), Math.toRadians(0)) //SPLINE TO CONSTANT
                                 .build();
 
                         //initial delay
@@ -203,6 +203,7 @@ public class SightBlueOuter extends LinearOpMode {
                         mech.wait(500);
 
                         //shoot first set of rings
+                        /*DISABLED DUE TO ODOMETRY
                         drive.followTrajectory(shootRings1);
                         mech.wait(500);
                         mech.pushRings();
@@ -218,7 +219,7 @@ public class SightBlueOuter extends LinearOpMode {
                         mech.wait(500);
                         mech.pushRings();
                         mech.wait(500);
-
+                        */
                         //drive to get second wobble
                         /*
                         drive.followTrajectory(getSecondWobble);
@@ -242,6 +243,8 @@ public class SightBlueOuter extends LinearOpMode {
                         mech.wobbleArmControl(Mechanisms.wobbleArmPos.UP);
                         mech.wait(500);
                            */
+
+
                         drive.followTrajectory(park);
 
                         autonRunning = false;

@@ -42,8 +42,9 @@ public class  Mechanisms {
     public static double PUSH_MAX_VALUE = 0.29;
     public static double PUSH_MIN_VALUE = 0.45;
 
-    public static double WOBBLE_MAX_VALUE = 0.5;
-    public static double WOBBLE_MIN_VALUE = 0.01;
+    public static double WOBBLE_MAX_VALUE = 1.0;
+    public static double WOBBLE_INIT_VALUE = 0.2;
+    public static double WOBBLE_MIN_VALUE = 0.5;
 
     public static double WOBBLE_CLAW_MIN_VALUE = 0.5;
     public static double WOBBLE_CLAW_MAX_VALUE = 0.1;
@@ -54,8 +55,8 @@ public class  Mechanisms {
     public static double STICK_MAX_VALUE = 0.5;
     public static double STICK_MIN_VALUE = 1;
 
-    public static double SHOOT_TPS = 1500; //HIGH speed
-    public static double POWERSHOT_TPS = 1300; //MED speed
+    public static double SHOOT_TPS = 1600; //HIGH speed
+    public static double POWERSHOT_TPS = 1400; //MED speed
     public static double MIDDLEGOAL_TPS = 1300; //LOW speed
 
 
@@ -74,7 +75,7 @@ public class  Mechanisms {
     }
 
     public enum wobbleArmPos {
-        UP, DOWN, AVG, OVER
+        UP, DOWN, INIT
     }
 
     public enum wobbleTurretPos {
@@ -134,7 +135,7 @@ public class  Mechanisms {
         indexPush.setPosition(PUSH_MIN_VALUE);
 
         wobbleControl(wobblePos.CLOSE);
-        wobbleArmControl(wobbleArmPos.UP);
+        wobbleArmControl(wobbleArmPos.INIT);
         wobbleTurretControl(wobbleTurretPos.IN);
 
 
@@ -208,14 +209,11 @@ public class  Mechanisms {
             case UP:
                 wobbleArm.setPosition(WOBBLE_MIN_VALUE);
                 break;
-            case AVG:
-                wobbleArm.setPosition((WOBBLE_MAX_VALUE + WOBBLE_MIN_VALUE) / 2);
+            case INIT:
+                wobbleArm.setPosition(WOBBLE_INIT_VALUE);
                 break;
             case DOWN:
                 wobbleArm.setPosition(WOBBLE_MAX_VALUE);
-                break;
-            case OVER:
-                wobbleArm.setPosition(0.75);
                 break;
         }
     }

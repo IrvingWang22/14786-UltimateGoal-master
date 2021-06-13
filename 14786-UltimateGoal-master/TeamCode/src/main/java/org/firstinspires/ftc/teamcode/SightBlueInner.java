@@ -145,17 +145,17 @@ public class SightBlueInner extends LinearOpMode {
                         telemetry.update();
 
                         Trajectory dropWobble = drive.trajectoryBuilder(startPose)
-                                .splineTo(new Vector2d(BLUE_JUNCTION_X, BLUE_JUNCTION_Y), Math.toRadians(0))
+                                .splineToConstantHeading(new Vector2d(BLUE_JUNCTION_X, BLUE_JUNCTION_Y), Math.toRadians(0))
                                 .splineTo(new Vector2d(BLUE_WOBBLE_X, BLUE_WOBBLE_Y),BLUE_WOBBLE_HEADING)
                                 .addDisplacementMarker(() -> {
-                                    mech.setShooter(Mechanisms.motorPower.HIGH);
+                                    //mech.setShooter(Mechanisms.motorPower.HIGH);
                                 })
                                 .build();
 
 
-                        Trajectory shootRings1 = drive.trajectoryBuilder(dropWobble.end())
+                        Trajectory shootRings1 = drive.trajectoryBuilder(dropWobble.end(), true)
                                 //.splineTo(new Vector2d(BLUE_JUNCTION_X2, BLUE_JUNCTION_Y2), (Math.toRadians(0) + 1e-6))
-                                .splineTo(new Vector2d(BLUE_SHOOTING_X, BLUE_SHOOTING_Y), Math.toRadians(0))
+                                .splineToLinearHeading(new Pose2d(BLUE_SHOOTING_X, BLUE_SHOOTING_Y, BLUE_WOBBLE_HEADING), Math.toRadians(0))
                                 .build();
 
 
@@ -184,11 +184,11 @@ public class SightBlueInner extends LinearOpMode {
                                 .splineToConstantHeading(new Vector2d(RED_WOBBLE_X, RED_WOBBLE_Y), Math.toRadians(0))
                                 .build();
                         */
-                        Trajectory park = drive.trajectoryBuilder(shootRings2.end())
+                        Trajectory park = drive.trajectoryBuilder(dropWobble.end()) //TEMP
                                 .addDisplacementMarker(() -> {
                                     mech.setShooter(Mechanisms.motorPower.OFF);
                                 })
-                                .splineToConstantHeading(new Vector2d(BLUE_ENDING_X, BLUE_ENDING_Y), Math.toRadians(0))
+                                .splineTo(new Vector2d(BLUE_ENDING_X, BLUE_ENDING_Y), Math.toRadians(0)) //SPLINE TO CONSTANT
                                 .build();
 
                         //initial delay
@@ -205,6 +205,7 @@ public class SightBlueInner extends LinearOpMode {
                         mech.wait(500);
 
                         //shoot first set of rings
+                        /*
                         drive.followTrajectory(shootRings1);
                         mech.wait(500);
                         mech.pushRings();
@@ -220,7 +221,7 @@ public class SightBlueInner extends LinearOpMode {
                         mech.wait(500);
                         mech.pushRings();
                         mech.wait(500);
-
+                        */
                         //drive to get second wobble
                         /*
                         drive.followTrajectory(getSecondWobble);
