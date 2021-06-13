@@ -18,7 +18,7 @@ public class VelShooter extends LinearOpMode {
 
     public Servo indexPush;
 
-    public static double SHOOT_TPS = -2700;
+    public static double SHOOT_TPS = 2700;
 
     private double currentTPS = 0;
 
@@ -75,8 +75,8 @@ public class VelShooter extends LinearOpMode {
             shooterOne.setVelocity(currentTPS);
             shooterTwo.setVelocity(currentTPS);
 
-            telemetry.addData("S1 Current", shooterOne.getVelocity());
-            telemetry.addData("S2 Current", shooterTwo.getVelocity());
+            telemetry.addData("S1 Current", shooterOne.getCurrentPosition());
+            telemetry.addData("S2 Current", shooterTwo.getCurrentPosition());
             telemetry.addLine();
             telemetry.addData("S Expected", currentTPS);
             telemetry.update();

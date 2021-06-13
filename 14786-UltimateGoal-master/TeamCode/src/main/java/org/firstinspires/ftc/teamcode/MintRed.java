@@ -165,19 +165,16 @@ public class MintRed extends LinearOpMode {
                         mech.wait(1000);
                         mech.pushRing();
                         mech.wait(1000);
-
                         drive.followTrajectory(traj2);
                         telemetry.addLine("second powershot");
                         mech.wait(500);
                         mech.pushRing();
                         mech.wait(500);
-
                         drive.followTrajectory(traj3);
                         telemetry.addLine("third powershot");
                         mech.wait(500);
                         mech.pushRing();
                         mech.wait(3000);
-
                         mech.setShooter(Mechanisms.motorPower.OFF);
                            */
 
