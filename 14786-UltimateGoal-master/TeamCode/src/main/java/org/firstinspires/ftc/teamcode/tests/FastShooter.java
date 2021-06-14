@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.tests;
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -14,6 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Config
+@Disabled
 @Autonomous(name = "Fast Shooter")
 public class FastShooter extends LinearOpMode {
 

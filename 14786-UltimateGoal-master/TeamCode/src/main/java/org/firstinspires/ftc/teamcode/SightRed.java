@@ -53,22 +53,23 @@ public class SightRed extends LinearOpMode {
     public static double RED_JUNCTION_X3 = -53;
     public static double RED_JUNCTION_Y3 =  -25;
 
-    public static double RED_SHOOTING_X = -1;
-    public static double RED_SHOOTING_Y = -34;
+    public static double RED_SHOOTING_X = -6;
+    public static double RED_SHOOTING_Y = -42;
 
-    public static double RED_INTAKE_Y = RED_SHOOTING_Y-(TILE*2);
+    public static double RED_INTAKE_X = -36;
+    public static double RED_INTAKE_Y = -36;
 
-    public static double RED_ENDING_X = 16; // STARTING X FOR TELEOP + ENDING X FOR AUTON
-    public static double RED_ENDING_Y = -42; // STARTING Y FOR TELEOP + ENDING Y FOR AUTON
+    public static double RED_ENDING_X = 12; // STARTING X FOR TELEOP + ENDING X FOR AUTON
+    public static double RED_ENDING_Y = -12; // STARTING Y FOR TELEOP + ENDING Y FOR AUTON
 
     public static double RED_WOBBLE_X_0 = 0;
-    public static double RED_WOBBLE_Y_0 = -48;
+    public static double RED_WOBBLE_Y_0 = -52;
 
-    public static double RED_WOBBLE_X_1 = 24;
-    public static double RED_WOBBLE_Y_1 = -24;
+    public static double RED_WOBBLE_X_1 = 18;
+    public static double RED_WOBBLE_Y_1 = -30;
 
-    public static double RED_WOBBLE_X_4 = 48;
-    public static double RED_WOBBLE_Y_4 = -48;
+    public static double RED_WOBBLE_X_4 = 40;
+    public static double RED_WOBBLE_Y_4 = -52;
 
     //default position on 0 ring
     public double RED_WOBBLE_X = RED_WOBBLE_X_0;
@@ -142,15 +143,18 @@ public class SightRed extends LinearOpMode {
 
                         Trajectory dropWobble = drive.trajectoryBuilder(startPose)
                                 .splineToConstantHeading(new Vector2d(RED_JUNCTION_X, RED_JUNCTION_Y), Math.toRadians(0))
-                                .splineToConstantHeading(new Vector2d(RED_WOBBLE_X, RED_WOBBLE_Y),Math.toRadians(0))
+                                .build();
+
+                        Trajectory dropWobble2 = drive.trajectoryBuilder(dropWobble.end())
+                                .lineToConstantHeading(new Vector2d(RED_WOBBLE_X, RED_WOBBLE_Y))
                                 .addDisplacementMarker(() -> {
                                     mech.setShooter(Mechanisms.motorPower.HIGH);
                                 })
                                 .build();
 
 
-                        Trajectory shootRings1 = drive.trajectoryBuilder(dropWobble.end())
-                                .splineToConstantHeading(new Vector2d(RED_SHOOTING_X, RED_SHOOTING_Y), Math.toRadians(0))
+                        Trajectory shootRings1 = drive.trajectoryBuilder(dropWobble2.end())
+                                .lineToConstantHeading(new Vector2d(RED_SHOOTING_X, RED_SHOOTING_Y))
                                 .build();
 
 
@@ -158,11 +162,7 @@ public class SightRed extends LinearOpMode {
                                 .addDisplacementMarker(() -> {
                                     mech.runIntake(Mechanisms.intakeState.IN);
                                 })
-                                .strafeTo(
-                                        new Vector2d(RED_SHOOTING_X, RED_INTAKE_Y)
-                                        //SampleMecanumDrive.getVelocityConstraint(15, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH),
-                                        //SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL)
-                                )
+                                .strafeTo(new Vector2d(RED_INTAKE_X, RED_INTAKE_Y))
 
                                 .build();
 
@@ -181,7 +181,7 @@ public class SightRed extends LinearOpMode {
                                 .splineToConstantHeading(new Vector2d(RED_WOBBLE_X, RED_WOBBLE_Y), Math.toRadians(0))
                                 .build();
                         */
-                        Trajectory park = drive.trajectoryBuilder(shootRings2.end()) //TEMP
+                        Trajectory park = drive.trajectoryBuilder(shootRings1.end()) //TEMP
                                 .addDisplacementMarker(() -> {
                                     mech.setShooter(Mechanisms.motorPower.OFF);
                                 })
@@ -192,7 +192,9 @@ public class SightRed extends LinearOpMode {
                         //initial delay
                         //mech.wait(AUTON_DELAY);
                         //drop wobble
+                        mech.wobbleArmControl(Mechanisms.wobbleArmPos.UP);
                         drive.followTrajectory(dropWobble);
+                        drive.followTrajectory(dropWobble2);
                         mech.wait(500);
                         mech.wobbleArmControl(Mechanisms.wobbleArmPos.DOWN);
                         mech.wait(500);
@@ -206,6 +208,7 @@ public class SightRed extends LinearOpMode {
                         mech.pushRings();
                         mech.wait(500);
                         //collect new rings
+                        /*
                         drive.followTrajectory(intakeRings);
                         mech.wait(1000);
                         mech.runIntake(Mechanisms.intakeState.OFF);
@@ -214,7 +217,7 @@ public class SightRed extends LinearOpMode {
                         mech.wait(500);
                         mech.pushRings();
                         mech.wait(500);
-
+                        */
 
                         //drive to get second wobble
                         /*

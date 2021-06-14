@@ -58,9 +58,9 @@ public class DriveConstants {
      * empirically tuned.
      */
 //     1.0 / rpmToVelocity(MAX_RPM);
-    public static double kV = 0.011; //correct
-    public static double kA = 0.00005;
-    public static double kStatic = 0.085;
+    public static double kV = 0.0135; //correct
+    public static double kA = 0.003;
+    public static double kStatic = 0.04;
 
     /*
      * These values are used to generate the trajectories for you robot. To ensure proper operation,
@@ -71,11 +71,11 @@ public class DriveConstants {
      * forces acceleration-limited profiling). All distance units are inches.
      */
 
-    public static double MAX_VEL = 75.0; //  87.222
-    public static double MAX_ACCEL = 75.0; //87.222
+    public static double MAX_VEL = 65.0; //  87.222 (116)
+    public static double MAX_ACCEL = 65.0; //87.222
 
-    public static double MAX_ANG_VEL = Math.toRadians(400); //569 real max
-    public static double MAX_ANG_ACCEL = Math.toRadians(400);
+    public static double MAX_ANG_VEL = Math.toRadians(350); //569 real max
+    public static double MAX_ANG_ACCEL = Math.toRadians(350);
 
 
 

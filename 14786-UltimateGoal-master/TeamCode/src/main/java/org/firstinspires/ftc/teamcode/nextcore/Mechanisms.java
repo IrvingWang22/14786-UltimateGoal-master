@@ -55,7 +55,7 @@ public class  Mechanisms {
     public static double STICK_MAX_VALUE = 0.5;
     public static double STICK_MIN_VALUE = 1;
 
-    public static double SHOOT_TPS = 1600; //HIGH speed
+    public static double SHOOT_TPS = 1500; //HIGH speed
     public static double POWERSHOT_TPS = 1400; //MED speed
     public static double MIDDLEGOAL_TPS = 1300; //LOW speed
 

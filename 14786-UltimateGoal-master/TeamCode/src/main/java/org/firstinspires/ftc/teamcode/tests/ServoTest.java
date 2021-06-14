@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.Servo;
 
 @Config
-//@Disabled
+@Disabled
 @TeleOp(name = "ServoTest")
 public class ServoTest extends LinearOpMode {
 

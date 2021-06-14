@@ -51,28 +51,32 @@ public class SightBlueOuter extends LinearOpMode {
     //public static double RED_JUNCTION_X3 = -53;
     //public static double RED_JUNCTION_Y3 =  -25;
 
-    public static double BLUE_SHOOTING_X = -1;
-    public static double BLUE_SHOOTING_Y = 34;
+    public static double BLUE_SHOOTING_X = -4;
+    public static double BLUE_SHOOTING_Y = 30;
 
     public static double BLUE_ENDING_X = 16; // STARTING X FOR TELEOP + ENDING X FOR AUTON
     public static double BLUE_ENDING_Y = 42; // STARTING Y FOR TELEOP + ENDING Y FOR AUTON
 
-    public static double BLUE_WOBBLE_X_0 = 0;
+    public static double BLUE_WOBBLE_X_0 = 24;
     public static double BLUE_WOBBLE_Y_0 = 48;
-    public static double BLUE_WOBBLE_HEADING_0 = Math.toRadians(90);
+    public static double BLUE_WOBBLE_HEADING_0 = Math.toRadians(180);
+    public static double BLUE_SHOOTING_HEADING_0 = 10;
 
-    public static double BLUE_WOBBLE_X_1 = 24;
-    public static double BLUE_WOBBLE_Y_1 = 48;
-    public static double BLUE_WOBBLE_HEADING_1 = Math.toRadians(-90);
+    public static double BLUE_WOBBLE_X_1 = 20;
+    public static double BLUE_WOBBLE_Y_1 = 24;
+    public static double BLUE_WOBBLE_HEADING_1 = Math.toRadians(90);
+    public static double BLUE_SHOOTING_HEADING_1 = -6;
 
     public static double BLUE_WOBBLE_X_4 = 48;
     public static double BLUE_WOBBLE_Y_4 = 48;
     public static double BLUE_WOBBLE_HEADING_4 = Math.toRadians(90);
+    public static double BLUE_SHOOTING_HEADING_4 = 0;
 
     //default position on 0 ring
     public double BLUE_WOBBLE_X = BLUE_WOBBLE_X_0;
     public double BLUE_WOBBLE_Y = BLUE_WOBBLE_Y_0;
     public double BLUE_WOBBLE_HEADING = BLUE_WOBBLE_HEADING_0;
+    public static double BLUE_SHOOTING_HEADING = BLUE_SHOOTING_HEADING_0;
 
     public static double BLUE_SECOND_WOBBLE_X = -TILE*2;
     public static double BLUE_SECOND_WOBBLE_Y = -ONE_HALF_TILE; //36
@@ -123,6 +127,7 @@ public class SightBlueOuter extends LinearOpMode {
                                 BLUE_WOBBLE_X = BLUE_WOBBLE_X_4;
                                 BLUE_WOBBLE_Y = BLUE_WOBBLE_Y_4;
                                 BLUE_WOBBLE_HEADING = BLUE_WOBBLE_HEADING_4;
+                                BLUE_SHOOTING_HEADING = BLUE_SHOOTING_HEADING_4;
                                 break;
                             } else if (recognition.getLabel().equals("Single")) {
                                 // SINGLE RING
@@ -130,6 +135,7 @@ public class SightBlueOuter extends LinearOpMode {
                                 BLUE_WOBBLE_X = BLUE_WOBBLE_X_1;
                                 BLUE_WOBBLE_Y = BLUE_WOBBLE_Y_1;
                                 BLUE_WOBBLE_HEADING = BLUE_WOBBLE_HEADING_1;
+                                BLUE_SHOOTING_HEADING = BLUE_SHOOTING_HEADING_1;
                                 break;
                             } else {
                                 // NO RINGS
@@ -137,6 +143,7 @@ public class SightBlueOuter extends LinearOpMode {
                                 BLUE_WOBBLE_X = BLUE_WOBBLE_X_0;
                                 BLUE_WOBBLE_Y = BLUE_WOBBLE_Y_0;
                                 BLUE_WOBBLE_HEADING = BLUE_WOBBLE_HEADING_0;
+                                BLUE_SHOOTING_HEADING = BLUE_SHOOTING_HEADING_0;
                                 break;
                             }
 
@@ -145,15 +152,20 @@ public class SightBlueOuter extends LinearOpMode {
 
                         Trajectory dropWobble = drive.trajectoryBuilder(startPose)
                                 .splineToConstantHeading(new Vector2d(BLUE_JUNCTION_X, BLUE_JUNCTION_Y), Math.toRadians(0))
-                                .splineTo(new Vector2d(BLUE_WOBBLE_X, BLUE_WOBBLE_Y),BLUE_WOBBLE_HEADING)
+                                .build();
+
+                        Trajectory dropWobble2 = drive.trajectoryBuilder(dropWobble.end())
+                                //.splineToConstantHeading(new Vector2d(BLUE_JUNCTION_X, BLUE_JUNCTION_Y), Math.toRadians(0))
+                                .lineToLinearHeading(new Pose2d(BLUE_WOBBLE_X, BLUE_WOBBLE_Y, BLUE_WOBBLE_HEADING))
                                 .addDisplacementMarker(() -> {
                                     mech.setShooter(Mechanisms.motorPower.HIGH);
                                 })
                                 .build();
 
 
-                        Trajectory shootRings1 = drive.trajectoryBuilder(dropWobble.end())
-                                .splineToLinearHeading(new Pose2d(BLUE_SHOOTING_X, BLUE_SHOOTING_Y, BLUE_WOBBLE_HEADING), Math.toRadians(0))
+                        Trajectory shootRings1 = drive.trajectoryBuilder(dropWobble2.end())
+                                //.splineTo(new Vector2d(BLUE_JUNCTION_X2, BLUE_JUNCTION_Y2), (Math.toRadians(0) + 1e-6))
+                                .lineToLinearHeading(new Pose2d(BLUE_SHOOTING_X, BLUE_SHOOTING_Y, Math.toRadians(BLUE_SHOOTING_HEADING)))
                                 .build();
 
 
@@ -193,7 +205,9 @@ public class SightBlueOuter extends LinearOpMode {
                         //mech.wait(AUTON_DELAY);
 
                         //drop wobble
+                        mech.wobbleArmControl(Mechanisms.wobbleArmPos.UP);
                         drive.followTrajectory(dropWobble);
+                        drive.followTrajectory(dropWobble2);
                         mech.wait(500);
                         mech.wobbleArmControl(Mechanisms.wobbleArmPos.DOWN);
                         mech.wait(500);
@@ -208,6 +222,7 @@ public class SightBlueOuter extends LinearOpMode {
                         mech.pushRings();
                         mech.wait(500);
                         //collect new rings
+                        /*
                         drive.followTrajectory(intakeRings);
                         mech.wait(1000);
                         mech.runIntake(Mechanisms.intakeState.OFF);
@@ -216,7 +231,7 @@ public class SightBlueOuter extends LinearOpMode {
                         mech.wait(500);
                         mech.pushRings();
                         mech.wait(500);
-
+                        */
                         //drive to get second wobble
                         /*
                         drive.followTrajectory(getSecondWobble);

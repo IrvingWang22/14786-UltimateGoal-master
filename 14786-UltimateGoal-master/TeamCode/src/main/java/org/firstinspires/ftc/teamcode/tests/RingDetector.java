@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.tests;
 
 import com.acmerobotics.dashboard.config.Config;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -10,7 +11,7 @@ import org.firstinspires.ftc.teamcode.nextcore.ObjectDetection;
 import java.util.List;
 
 @Config
-//@Disabled
+@Disabled
 @TeleOp(name = "RingDetector")
 public class RingDetector extends LinearOpMode {
 
