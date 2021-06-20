@@ -60,7 +60,7 @@ public class SightRed extends LinearOpMode {
     public static double RED_INTAKE_Y = -36;
 
     public static double RED_ENDING_X = 12; // STARTING X FOR TELEOP + ENDING X FOR AUTON
-    public static double RED_ENDING_Y = -12; // STARTING Y FOR TELEOP + ENDING Y FOR AUTON
+    public static double RED_ENDING_Y = -20; // STARTING Y FOR TELEOP + ENDING Y FOR AUTON
 
     public static double RED_WOBBLE_X_0 = 0;
     public static double RED_WOBBLE_Y_0 = -52;
@@ -143,20 +143,18 @@ public class SightRed extends LinearOpMode {
 
                         Trajectory dropWobble = drive.trajectoryBuilder(startPose)
                                 .splineToConstantHeading(new Vector2d(RED_JUNCTION_X, RED_JUNCTION_Y), Math.toRadians(0))
-                                .build();
-
-                        Trajectory dropWobble2 = drive.trajectoryBuilder(dropWobble.end())
-                                .lineToConstantHeading(new Vector2d(RED_WOBBLE_X, RED_WOBBLE_Y))
                                 .addDisplacementMarker(() -> {
                                     mech.setShooter(Mechanisms.motorPower.HIGH);
                                 })
                                 .build();
 
-
-                        Trajectory shootRings1 = drive.trajectoryBuilder(dropWobble2.end())
+                        Trajectory shootRings1 = drive.trajectoryBuilder(dropWobble.end())
                                 .lineToConstantHeading(new Vector2d(RED_SHOOTING_X, RED_SHOOTING_Y))
                                 .build();
 
+                        Trajectory dropWobble2 = drive.trajectoryBuilder(shootRings1.end())
+                                .lineToConstantHeading(new Vector2d(RED_WOBBLE_X, RED_WOBBLE_Y))
+                                .build();
 
                         Trajectory intakeRings = drive.trajectoryBuilder(shootRings1.end())
                                 .addDisplacementMarker(() -> {
@@ -191,9 +189,16 @@ public class SightRed extends LinearOpMode {
 
                         //initial delay
                         //mech.wait(AUTON_DELAY);
-                        //drop wobble
                         mech.wobbleArmControl(Mechanisms.wobbleArmPos.UP);
+
                         drive.followTrajectory(dropWobble);
+                        //shoot first set of rings
+                        drive.followTrajectory(shootRings1);
+                        mech.wait(500);
+                        mech.pushRings();
+                        mech.wait(500);
+
+                        //drop wobble
                         drive.followTrajectory(dropWobble2);
                         mech.wait(500);
                         mech.wobbleArmControl(Mechanisms.wobbleArmPos.DOWN);
@@ -202,11 +207,7 @@ public class SightRed extends LinearOpMode {
                         mech.wait(500);
                         mech.wobbleArmControl(Mechanisms.wobbleArmPos.UP);
                         mech.wait(500);
-                        //shoot first set of rings
-                        drive.followTrajectory(shootRings1);
-                        mech.wait(500);
-                        mech.pushRings();
-                        mech.wait(500);
+
                         //collect new rings
                         /*
                         drive.followTrajectory(intakeRings);

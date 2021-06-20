@@ -36,7 +36,7 @@ public class  Mechanisms {
     // Init Lists
 
     // Other Variables
-    public static int PUSH_RESTORE_TIME = 100 ;
+    public static int PUSH_RESTORE_TIME = 100;
 
     // Servo Positions
     public static double PUSH_MAX_VALUE = 0.29;
@@ -44,7 +44,7 @@ public class  Mechanisms {
 
     public static double WOBBLE_MAX_VALUE = 1.0;
     public static double WOBBLE_INIT_VALUE = 0.2;
-    public static double WOBBLE_MIN_VALUE = 0.5;
+    public static double WOBBLE_MIN_VALUE = 0.58;
 
     public static double WOBBLE_CLAW_MIN_VALUE = 0.5;
     public static double WOBBLE_CLAW_MAX_VALUE = 0.1;
@@ -55,7 +55,7 @@ public class  Mechanisms {
     public static double STICK_MAX_VALUE = 0.5;
     public static double STICK_MIN_VALUE = 1;
 
-    public static double SHOOT_TPS = 1500; //HIGH speed
+    public static double SHOOT_TPS = 1600; //HIGH speed
     public static double POWERSHOT_TPS = 1400; //MED speed
     public static double MIDDLEGOAL_TPS = 1300; //LOW speed
 

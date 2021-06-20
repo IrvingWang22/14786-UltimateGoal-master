@@ -21,7 +21,7 @@ public class FastShooter extends LinearOpMode {
 
     private DcMotorEx shooterOne, shooterTwo;
 
-    public static double MOTOR_POWER = 1;
+    public static double MOTOR_POWER = 1500;
 
     @Override
     public void runOpMode() {
@@ -42,8 +42,8 @@ public class FastShooter extends LinearOpMode {
         while (opModeIsActive()) {
 
 
-                shooterOne.setPower(MOTOR_POWER);
-                shooterTwo.setPower(MOTOR_POWER);
+                shooterOne.setVelocity(MOTOR_POWER);
+                shooterTwo.setVelocity(MOTOR_POWER);
 
         }
     }

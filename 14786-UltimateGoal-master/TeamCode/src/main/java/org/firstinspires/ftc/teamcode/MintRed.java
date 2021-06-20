@@ -40,6 +40,8 @@ public class MintRed extends LinearOpMode {
 
     public static double RED_POWERSHOT_STRAFE_DISTANCE = 7;
 
+    public static boolean SLOWMODE = false;
+
     enum Mode {
         DRIVER_CONTROL,
         AUTOMATIC_CONTROL
@@ -105,26 +107,37 @@ public class MintRed extends LinearOpMode {
                     if (gamepad1.right_trigger > 0.5) mech.pushRings();
                     if (gamepad1.left_trigger > 0.5) mech.pushRing();
 
+                    //Toggle slow mode (GAMEPAD1)
+                    /*
+                    if (gamepad1.a && SLOWMODE == true) {
+                        drive.setWeightedDrivePower(
+                                new Pose2d(
+                                        -(0.25)*gamepad1.left_stick_y, //rangeclip
+                                        -(0.25)*gamepad1.left_stick_x,
+                                        -(0.25)*gamepad1.right_stick_x
+                                )
+                        );
+                        SLOWMODE = !SLOWMODE;
+                    } else if (gamepad1.a && SLOWMODE == false) {
+                        drive.setWeightedDrivePower(
+                                new Pose2d(
+                                        -gamepad1.left_stick_y,
+                                        -gamepad1.left_stick_x,
+                                        -gamepad1.right_stick_x
+                                )
+                        );
+                        SLOWMODE = !SLOWMODE;
+                    }
+                    */
 
                     // Gamepad 2 - Michael/Atharv
-                    //Stick One Control (GAMEPAD2)
-                    if (gamepad2.back) {
-                        mech.stickOne.setPosition(0.8);
-                        telemetry.addLine("50%");
-                        telemetry.addLine();
-                    }
-                    if (gamepad2.start) {
-                        mech.stickOne.setPosition(0.35);
-                        telemetry.addLine("50%");
-                        telemetry.addLine();
-                    }
-
                     //Wobble Arm (GAMEPAD2)
                     if (gamepad2.y) mech.wobbleArmControl(Mechanisms.wobbleArmPos.UP);
                     if (gamepad2.a) mech.wobbleArmControl(Mechanisms.wobbleArmPos.DOWN);
+                    if (gamepad2.right_bumper) mech.wobbleArmControl(Mechanisms.wobbleArmPos.INIT);
                     if (gamepad2.b) mech.wobbleControl(Mechanisms.wobblePos.OPEN);
                     if (gamepad2.x) mech.wobbleControl(Mechanisms.wobblePos.CLOSE);
-
+                    
                     //Shooter Speeds (GAMEPAD2)
                     if (gamepad2.dpad_up) mech.setShooter(Mechanisms.motorPower.HIGH);
                     if (gamepad2.dpad_down) mech.setShooter(Mechanisms.motorPower.OFF);
@@ -134,17 +147,22 @@ public class MintRed extends LinearOpMode {
 
                     //AUTOMATIC CONTROL (GAMEPAD1)
                     //High Goal
+
                     if (gamepad1.right_bumper) {
+                        /*
                         Trajectory traj = drive.trajectoryBuilder(poseEstimate)
                                 .splineTo(SHOOTING_POSITION, TARGET_ANGLE)
                                 .build();
                         drive.followTrajectory(traj);
 
                         currentMode = Mode.AUTOMATIC_CONTROL;
+                        */
+
                     }
 
                     // TRIPLE Powershot
                     if (gamepad1.left_bumper) {
+                        /*
                         Trajectory traj = drive.trajectoryBuilder(poseEstimate)
                                 .splineTo(POWERSHOT_POSITION1, TARGET_ANGLE)
                                 .build();
@@ -179,6 +197,7 @@ public class MintRed extends LinearOpMode {
                            */
 
                         currentMode = Mode.AUTOMATIC_CONTROL;
+
                     }
 
                     break;

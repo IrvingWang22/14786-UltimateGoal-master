@@ -51,8 +51,8 @@ public class SightRedOuter extends LinearOpMode {
     public static double RED_JUNCTION_X3 = -53;
     public static double RED_JUNCTION_Y3 =  -25;
 
-    public static double RED_SHOOTING_X = -4;
-    public static double RED_SHOOTING_Y = -42;
+    public static double RED_SHOOTING_X = -2;
+    public static double RED_SHOOTING_Y = -46;
 
     public static double RED_ENDING_X = 12; // STARTING X FOR TELEOP + ENDING X FOR AUTON
     public static double RED_ENDING_Y = -42; // STARTING Y FOR TELEOP + ENDING Y FOR AUTON
@@ -138,19 +138,20 @@ public class SightRedOuter extends LinearOpMode {
 
                         Trajectory dropWobble = drive.trajectoryBuilder(startPose)
                                 .splineToConstantHeading(new Vector2d(RED_JUNCTION_X, RED_JUNCTION_Y), Math.toRadians(0))
-                                .build();
-
-                        Trajectory dropWobble2 = drive.trajectoryBuilder(dropWobble.end())
-                                .lineToConstantHeading(new Vector2d(RED_WOBBLE_X, RED_WOBBLE_Y))
                                 .addDisplacementMarker(() -> {
                                     mech.setShooter(Mechanisms.motorPower.HIGH);
                                 })
                                 .build();
 
-
-                        Trajectory shootRings1 = drive.trajectoryBuilder(dropWobble2.end())
+                        Trajectory shootRings1 = drive.trajectoryBuilder(dropWobble.end())
                                 .lineToConstantHeading(new Vector2d(RED_SHOOTING_X, RED_SHOOTING_Y))
                                 .build();
+
+                        Trajectory dropWobble2 = drive.trajectoryBuilder(shootRings1.end())
+                                .lineToConstantHeading(new Vector2d(RED_WOBBLE_X, RED_WOBBLE_Y))
+
+                                .build();
+
 
 
                         Trajectory intakeRings = drive.trajectoryBuilder(shootRings1.end())
@@ -178,7 +179,7 @@ public class SightRedOuter extends LinearOpMode {
                                 .splineToConstantHeading(new Vector2d(RED_WOBBLE_X, RED_WOBBLE_Y), Math.toRadians(0))
                                 .build();
                         */
-                        Trajectory park = drive.trajectoryBuilder(shootRings1.end())
+                        Trajectory park = drive.trajectoryBuilder(dropWobble2.end())
                                 .addDisplacementMarker(() -> {
                                     mech.setShooter(Mechanisms.motorPower.OFF);
                                 })
@@ -187,10 +188,16 @@ public class SightRedOuter extends LinearOpMode {
 
                         //initial delay
                         //mech.wait(AUTON_DELAY);
+                        mech.wobbleArmControl(Mechanisms.wobbleArmPos.UP);
+
+                        drive.followTrajectory(dropWobble);
+                        //shoot first set of rings
+                        drive.followTrajectory(shootRings1);
+                        mech.wait(500);
+                        mech.pushRings();
+                        mech.wait(500);
 
                         //drop wobble
-                        mech.wobbleArmControl(Mechanisms.wobbleArmPos.UP);
-                        drive.followTrajectory(dropWobble);
                         drive.followTrajectory(dropWobble2);
                         mech.wait(500);
                         mech.wobbleArmControl(Mechanisms.wobbleArmPos.DOWN);
@@ -200,11 +207,7 @@ public class SightRedOuter extends LinearOpMode {
                         mech.wobbleArmControl(Mechanisms.wobbleArmPos.UP);
                         mech.wait(500);
 
-                        //shoot first set of rings
-                        drive.followTrajectory(shootRings1);
-                        mech.wait(500);
-                        mech.pushRings();
-                        mech.wait(500);
+
                         //collect new rings
                         /*
                         drive.followTrajectory(intakeRings);

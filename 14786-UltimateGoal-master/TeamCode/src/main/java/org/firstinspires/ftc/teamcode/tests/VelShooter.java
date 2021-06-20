@@ -10,7 +10,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 @Config
-@Disabled
+//@Disabled
 @TeleOp(name = "Velocity Shooter")
 public class VelShooter extends LinearOpMode {
 
@@ -20,7 +20,7 @@ public class VelShooter extends LinearOpMode {
 
     public Servo indexPush;
 
-    public static double SHOOT_TPS = 2700;
+    public static double SHOOT_TPS = 1500;
 
     private double currentTPS = 0;
 
@@ -30,6 +30,8 @@ public class VelShooter extends LinearOpMode {
 
     // Other Variables
     public static int PUSH_RESTORE_TIME = 250;
+
+    double currTime = runtime.milliseconds();
 
     @Override
     public void runOpMode() {
@@ -77,8 +79,8 @@ public class VelShooter extends LinearOpMode {
             shooterOne.setVelocity(currentTPS);
             shooterTwo.setVelocity(currentTPS);
 
-            telemetry.addData("S1 Current", shooterOne.getCurrentPosition());
-            telemetry.addData("S2 Current", shooterTwo.getCurrentPosition());
+            telemetry.addData("S1 Current", (shooterOne.getVelocity()));
+            telemetry.addData("S2 Current", (shooterTwo.getVelocity()));
             telemetry.addLine();
             telemetry.addData("S Expected", currentTPS);
             telemetry.update();
