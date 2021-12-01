@@ -6,6 +6,7 @@ import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.acmerobotics.roadrunner.trajectory.constraints.TrajectoryAccelerationConstraint;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
@@ -16,6 +17,7 @@ import org.firstinspires.ftc.teamcode.nextcore.ObjectDetection;
 import java.util.List;
 
 @Config
+@Disabled
 @Autonomous(name = "A - Sight Blue Inner")
 public class SightBlueInner extends LinearOpMode {
 

@@ -10,7 +10,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 @Config
-//@Disabled
+@Disabled
 @TeleOp(name = "Velocity Shooter")
 public class VelShooter extends LinearOpMode {
 

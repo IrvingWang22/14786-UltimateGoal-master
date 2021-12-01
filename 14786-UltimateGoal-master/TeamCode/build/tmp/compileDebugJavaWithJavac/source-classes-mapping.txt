@@ -42,6 +42,9 @@ org/firstinspires/ftc/teamcode/drive/opmode/StraightTest.java
  org.firstinspires.ftc.teamcode.drive.opmode.StraightTest
 org/firstinspires/ftc/teamcode/drive/opmode/TrackingWheelLateralDistanceTuner.java
  org.firstinspires.ftc.teamcode.drive.opmode.TrackingWheelLateralDistanceTuner
+org/firstinspires/ftc/teamcode/DriverRelativeControls.java
+ org.firstinspires.ftc.teamcode.DriverRelativeControls
+ org.firstinspires.ftc.teamcode.DriverRelativeControls$1
 org/firstinspires/ftc/teamcode/util/BNO055IMUUtil.java
  org.firstinspires.ftc.teamcode.util.BNO055IMUUtil
 org/firstinspires/ftc/teamcode/util/AssetsTrajectoryManager.java

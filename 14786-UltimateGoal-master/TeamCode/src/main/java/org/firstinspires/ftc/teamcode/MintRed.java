@@ -62,7 +62,7 @@ public class MintRed extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
-        Mechanisms mech = new Mechanisms(hardwareMap);
+        //Mechanisms mech = new Mechanisms(hardwareMap);
 
         drive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
@@ -99,6 +99,7 @@ public class MintRed extends LinearOpMode {
                     );
 
                     //Intake States (GAMEPAD1)
+                    /*
                     if (gamepad1.x) mech.runIntake(Mechanisms.intakeState.IN);
                     if (gamepad1.b) mech.runIntake(Mechanisms.intakeState.OUT);
                     if (gamepad1.y) mech.runIntake(Mechanisms.intakeState.OFF);
@@ -132,6 +133,7 @@ public class MintRed extends LinearOpMode {
 
                     // Gamepad 2 - Michael/Atharv
                     //Wobble Arm (GAMEPAD2)
+                    /*
                     if (gamepad2.y) mech.wobbleArmControl(Mechanisms.wobbleArmPos.UP);
                     if (gamepad2.a) mech.wobbleArmControl(Mechanisms.wobbleArmPos.DOWN);
                     if (gamepad2.right_bumper) mech.wobbleArmControl(Mechanisms.wobbleArmPos.INIT);
@@ -143,7 +145,7 @@ public class MintRed extends LinearOpMode {
                     if (gamepad2.dpad_down) mech.setShooter(Mechanisms.motorPower.OFF);
                     if (gamepad2.dpad_left) mech.setShooter(Mechanisms.motorPower.MED);
                     if (gamepad2.dpad_right) mech.setShooter(Mechanisms.motorPower.LOW);
-
+                    */
 
                     //AUTOMATIC CONTROL (GAMEPAD1)
                     //High Goal

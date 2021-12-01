@@ -1,3 +1,4 @@
+
 package org.firstinspires.ftc.teamcode.nextcore;
 
 import com.acmerobotics.dashboard.config.Config;
@@ -17,6 +18,7 @@ import java.util.List;
 public class  Mechanisms {
     // Init Objects
     public ElapsedTime runtime = new ElapsedTime();
+
 
     // Init Objects: DcMotorEx
     public DcMotorEx shooterOne, shooterTwo;
@@ -99,23 +101,8 @@ public class  Mechanisms {
     // Constructor
     public Mechanisms(HardwareMap hardwareMap) {
         //  Hardware mapping: DcMotorEx
-        shooterOne = hardwareMap.get(DcMotorEx.class, "shooterOne");
-        shooterTwo = hardwareMap.get(DcMotorEx.class, "shooterTwo");
 
-        intake = hardwareMap.get(DcMotorEx.class, "intake");
 
-        //  Hardware mapping: CRServo
-        bottomRoller = hardwareMap.get(CRServo.class, "bottomRoller");
-
-        //  Hardware mapping: Servo
-        indexPush = hardwareMap.get(Servo.class, "indexPush");
-
-        wobbleGrab = hardwareMap.get(Servo.class, "wobbleGrab");
-        wobbleArm = hardwareMap.get(Servo.class, "wobbleArm");
-        wobbleTurret = hardwareMap.get(Servo.class, "wobbleTurret");
-
-        stickOne = hardwareMap.get(Servo.class, "stickOne");
-        stickTwo = hardwareMap.get(Servo.class, "stickTwo");
 
         // Set Directions
 
@@ -278,3 +265,4 @@ public class  Mechanisms {
         }
     }
 }
+
