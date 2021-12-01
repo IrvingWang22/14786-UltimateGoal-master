@@ -100,8 +100,8 @@ public class FieldCentricDrive extends LinearOpMode {
             //driveVertical = -gamepad1.right_stick_y;
             //driveHorizontal = gamepad1.right_stick_x;
 
-            gamepadXCoordinate = gamepad1.left_stick_x; //this simply gives our x value relative to the driver
-            gamepadYCoordinate = -gamepad1.left_stick_y; //this simply gives our y vaue relative to the driver
+            gamepadXCoordinate = -gamepad1.left_stick_x; //this simply gives our x value relative to the driver
+            gamepadYCoordinate = gamepad1.left_stick_y; //this simply gives our y vaue relative to the driver
             fieldCentricDrive(driveTurn, gamepadXCoordinate, gamepadYCoordinate);
 
 
